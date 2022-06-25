@@ -1,0 +1,9 @@
+String appWelcomeText = "Welcome to Paddyway Academy.";
+String codeText = "Enter your code here";
+String submitButtonText = "Submit";
+String teachByText1 = "Lesson from";
+String teachByText2 = "SAJITH AHM";
+String teachByText3 = "Electrical and Electronic Engineering [EEE, UG]";
+String teachByText4 = "University of Peradeniya";
+String contactUsText = "To join our class";
+String joinButtonText = "Click here!!";
