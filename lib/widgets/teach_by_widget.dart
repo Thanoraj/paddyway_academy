@@ -28,7 +28,6 @@ class TeachByWidget extends StatelessWidget {
                 teachByText1,
                 style: TextStyle(fontSize: 15, color: Colors.yellow[400]),
               ),
-              const Spacer(),
               Text(
                 teachByText2,
                 style: const TextStyle(
@@ -36,10 +35,15 @@ class TeachByWidget extends StatelessWidget {
                     color: Colors.white,
                     fontWeight: FontWeight.bold),
               ),
-              const Spacer(),
-              Text(
-                teachByText3,
-                style: TextStyle(fontSize: 13, color: Colors.yellow[400]),
+              SizedBox(
+                width: MediaQuery.of(context).size.width - 125,
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(
+                    teachByText3,
+                    style: TextStyle(fontSize: 13, color: Colors.yellow[400]),
+                  ),
+                ),
               ),
               Text(
                 teachByText4,

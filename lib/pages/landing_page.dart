@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:paddyway_academy/constants.dart';
+import 'package:paddyway_academy/secrets.dart';
 import 'package:paddyway_academy/widgets/teach_by_widget.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class LandingPage extends StatelessWidget {
   const LandingPage({Key? key}) : super(key: key);
@@ -89,7 +91,9 @@ class LandingPage extends StatelessWidget {
             ),
             Center(
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=> ))
+                },
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -105,15 +109,20 @@ class LandingPage extends StatelessWidget {
             ),
             const TeachByWidget(),
             const SizedBox(
-              height: 20,
+              height: 25,
             ),
-            Text(
-              contactUsText,
-              style: const TextStyle(color: Colors.white, fontSize: 18),
+            Center(
+              child: Text(
+                contactUsText,
+                style: const TextStyle(color: Colors.white, fontSize: 18),
+              ),
             ),
             Center(
               child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    await launchUrl(
+                        Uri.parse("whatsapp://send?phone=$waNumber"));
+                  },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 20, vertical: 10),
