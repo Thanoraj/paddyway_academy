@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:paddyway_academy/constants.dart';
+import 'package:paddyway_academy/pages/home_page.dart';
 import 'package:paddyway_academy/secrets.dart';
 import 'package:paddyway_academy/widgets/teach_by_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+String userId = '';
 
 class LandingPage extends StatelessWidget {
   const LandingPage({Key? key}) : super(key: key);
@@ -50,16 +53,19 @@ class LandingPage extends StatelessWidget {
             const SizedBox(
               height: 30,
             ),
-            const Center(
+            Center(
               child: SizedBox(
                 width: 150,
                 child: TextField(
-                  style: TextStyle(
+                  onChanged: (val) {
+                    userId = val.trim();
+                  },
+                  style: const TextStyle(
                     fontSize: 20,
                     letterSpacing: 4,
                   ),
                   textAlign: TextAlign.center,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintStyle: TextStyle(
                       fontSize: 20,
                       color: Colors.white,
@@ -92,7 +98,10 @@ class LandingPage extends StatelessWidget {
             Center(
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=> ))
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const HomePage()));
                 },
                 child: Padding(
                   padding:
