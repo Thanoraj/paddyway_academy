@@ -43,12 +43,16 @@ class YoutubeVideoCard extends StatelessWidget {
                       fit: BoxFit.cover,
                     ),
                   ),
-                  Spacer(),
-                  Text(
-                    videoData['videoTitle'],
-                    style: TextStyle(fontSize: 18),
+                  const Spacer(),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      videoData['videoTitle'],
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(fontSize: 18),
+                    ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                 ],
               ),
             ),

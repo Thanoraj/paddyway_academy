@@ -4,6 +4,8 @@ Map user = {
     "Class": "E18",
     "allowedSubjects": [
       "U1",
+      "U3",
+      "U5",
     ],
   }
 };

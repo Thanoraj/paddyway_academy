@@ -39,6 +39,7 @@ class TeachByWidget extends StatelessWidget {
                 width: MediaQuery.of(context).size.width - 125,
                 child: FittedBox(
                   fit: BoxFit.scaleDown,
+                  alignment: Alignment.centerLeft,
                   child: Text(
                     teachByText3,
                     style: TextStyle(fontSize: 13, color: Colors.yellow[400]),
