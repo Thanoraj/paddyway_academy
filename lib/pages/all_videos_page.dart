@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:paddyway_academy/widgets/document_card.dart';
 import 'package:paddyway_academy/widgets/long_video_card.dart';
 
-class AllVideosPage extends StatelessWidget {
-  const AllVideosPage({Key? key, required this.videos, required this.title})
+class AllItemsPage extends StatelessWidget {
+  const AllItemsPage(
+      {Key? key, required this.itemsList, required this.title, this.type})
       : super(key: key);
-  final List videos;
+  final List itemsList;
   final String title;
+  final String? type;
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +17,11 @@ class AllVideosPage extends StatelessWidget {
         title: Text(title),
       ),
       body: ListView.builder(
-          itemCount: videos.length,
+          itemCount: itemsList.length,
           itemBuilder: (context, index) {
-            return LongVideoCard(videoInfo: videos[index]);
+            return type == "doc"
+                ? DocumentCard(document: itemsList[index])
+                : LongVideoCard(videoInfo: itemsList[index]);
           }),
     );
   }

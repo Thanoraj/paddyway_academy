@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:paddyway_academy/models/youtube_video.dart';
 import 'package:paddyway_academy/pages/youtube_video_player.dart';
 
 class LongVideoCard extends StatelessWidget {
   const LongVideoCard({Key? key, required this.videoInfo}) : super(key: key);
-  final Map videoInfo;
+  final YoutubeVideoModel videoInfo;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -33,7 +34,7 @@ class LongVideoCard extends StatelessWidget {
                     bottomLeft: Radius.circular(15),
                   ),
                   child: Image.network(
-                    videoInfo['thumbnails'],
+                    videoInfo.thumbnail!,
                     height: 100,
                     fit: BoxFit.fitHeight,
                   ),
@@ -41,27 +42,41 @@ class LongVideoCard extends StatelessWidget {
                 const SizedBox(
                   width: 10,
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Text(
-                      videoInfo['videoTitle'],
-                      style: const TextStyle(fontSize: 18),
-                    ),
-                    Row(
-                      children: [
-                        const Icon(Icons.timer_outlined),
-                        const SizedBox(
-                          width: 5,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text(
+                        videoInfo.title!,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                      Row(
+                        children: [
+                          const Icon(
+                            Icons.timer_outlined,
+                            size: 15,
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            videoInfo.duration!,
+                            style: const TextStyle(fontSize: 13),
+                          ),
+                        ],
+                      ),
+                      Container(
+                        child: Text(
+                          videoInfo.author!,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(fontSize: 14),
                         ),
-                        Text(
-                          videoInfo['duration'].split('.')[0],
-                          style: const TextStyle(fontSize: 15),
-                        ),
-                      ],
-                    ),
-                  ],
+                      ),
+                    ],
+                  ),
                 )
               ],
             ),

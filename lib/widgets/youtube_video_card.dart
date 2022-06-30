@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:paddyway_academy/models/youtube_video.dart';
 import 'package:paddyway_academy/pages/youtube_video_player.dart';
 
 class YoutubeVideoCard extends StatelessWidget {
   const YoutubeVideoCard({Key? key, required this.videoData}) : super(key: key);
-  final Map videoData;
+  final YoutubeVideoModel videoData;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -37,7 +38,7 @@ class YoutubeVideoCard extends StatelessWidget {
                         topLeft: Radius.circular(15),
                         topRight: Radius.circular(15)),
                     child: Image.network(
-                      videoData['thumbnails'],
+                      videoData.thumbnail!,
                       width: 250,
                       height: 120,
                       fit: BoxFit.cover,
@@ -47,8 +48,9 @@ class YoutubeVideoCard extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      videoData['videoTitle'],
+                      videoData.title!,
                       textAlign: TextAlign.center,
+                      overflow: TextOverflow.ellipsis,
                       style: const TextStyle(fontSize: 18),
                     ),
                   ),

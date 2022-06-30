@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:paddyway_academy/models/youtube_video.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class YoutubeVideoPlayer extends StatefulWidget {
   const YoutubeVideoPlayer({Key? key, required this.videoDetail})
       : super(key: key);
-  final Map videoDetail;
+  final YoutubeVideoModel videoDetail;
   @override
   _YoutubeVideoPlayerState createState() => _YoutubeVideoPlayerState();
 }
@@ -18,13 +19,11 @@ class _YoutubeVideoPlayerState extends State<YoutubeVideoPlayer> {
 
   late PlayerState _playerState;
   late YoutubeMetaData _videoMetaData;
-  double _volume = 100;
-  bool _muted = false;
   bool _isPlayerReady = false;
 
   @override
   void initState() {
-    videoId = YoutubePlayer.convertUrlToId(widget.videoDetail['id'])!;
+    videoId = YoutubePlayer.convertUrlToId(widget.videoDetail.id!)!;
     super.initState();
     _controller = YoutubePlayerController(
       initialVideoId: videoId,
@@ -42,7 +41,6 @@ class _YoutubeVideoPlayerState extends State<YoutubeVideoPlayer> {
     _seekToController = TextEditingController();
     _videoMetaData = const YoutubeMetaData();
     _playerState = PlayerState.unknown;
-    //secureScreen();
   }
 
   void listener() {
@@ -100,17 +98,15 @@ class _YoutubeVideoPlayerState extends State<YoutubeVideoPlayer> {
           ),
           builder: (context, player) => Scaffold(
             appBar: AppBar(
-              //foregroundColor: kBlueGreen600,
-              //backgroundColor: kBodyFull,
               leading: GestureDetector(
                 onTap: () {
                   Navigator.pop(context);
                 },
                 child: const Icon(
                   Icons.arrow_back,
-                  //color: kBlueGreen600White,
                 ),
               ),
+              title: Text(widget.videoDetail.title!),
             ),
             body: Material(
               child: SizedBox(
@@ -127,62 +123,59 @@ class _YoutubeVideoPlayerState extends State<YoutubeVideoPlayer> {
                         child: ListView(
                           shrinkWrap: true,
                           children: <Widget>[
-                            Padding(
-                              padding:
-                                  const EdgeInsets.fromLTRB(24, 10, 8, 8.0),
-                              child: Row(
-                                children: <Widget>[
-                                  Container(
-                                    width: 4,
-                                    height: 30,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(500),
-                                      //color: kVideoPAgeTextColor,
-                                    ),
-                                    child: const Text(""),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: SizedBox(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.8,
-                                      child: Text(
-                                        widget.videoDetail['videoTitle'],
-                                        style: const TextStyle(
-                                            //color: kVideoPAgeTextColor,
-                                            fontFamily: 'Red Hat Display',
-                                            fontSize: 24),
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 16.0),
-                              child: Row(
-                                children: [
-                                  const Spacer(),
-                                  const Icon(
-                                    Icons.timer_outlined,
-                                  ),
-                                  const SizedBox(
-                                    width: 5,
-                                  ),
-                                  Text(
-                                    "${widget.videoDetail['duration'].split(".")[0]}",
-                                    style: const TextStyle(
-                                        //color: kVideoPagelvlText,
-                                        fontFamily: 'Red Hat Display',
-                                        fontSize: 14),
-                                  ),
-                                ],
-                              ),
-                            ),
+                            // Padding(
+                            //   padding:
+                            //       const EdgeInsets.fromLTRB(24, 10, 8, 8.0),
+                            //   child: Row(
+                            //     children: <Widget>[
+                            //       Container(
+                            //         width: 4,
+                            //         height: 30,
+                            //         decoration: BoxDecoration(
+                            //           borderRadius: BorderRadius.circular(500),
+                            //         ),
+                            //         child: const Text(""),
+                            //       ),
+                            //       Padding(
+                            //         padding: const EdgeInsets.all(8.0),
+                            //         child: SizedBox(
+                            //           width: MediaQuery.of(context).size.width *
+                            //               0.8,
+                            //           child: Text(
+                            //             widget.videoDetail.title!,
+                            //             style: const TextStyle(
+                            //                 fontFamily: 'Red Hat Display',
+                            //                 fontSize: 24),
+                            //           ),
+                            //         ),
+                            //       )
+                            //     ],
+                            //   ),
+                            // ),
+                            // const SizedBox(
+                            //   height: 10,
+                            // ),
+                            // Padding(
+                            //   padding:
+                            //       const EdgeInsets.symmetric(horizontal: 16.0),
+                            //   child: Row(
+                            //     children: [
+                            //       const Spacer(),
+                            //       const Icon(
+                            //         Icons.timer_outlined,
+                            //       ),
+                            //       const SizedBox(
+                            //         width: 5,
+                            //       ),
+                            //       Text(
+                            //         widget.videoDetail.duration!,
+                            //         style: const TextStyle(
+                            //             fontFamily: 'Red Hat Display',
+                            //             fontSize: 14),
+                            //       ),
+                            //     ],
+                            //   ),
+                            // ),
                             const SizedBox(
                               height: 20,
                             ),
@@ -190,9 +183,8 @@ class _YoutubeVideoPlayerState extends State<YoutubeVideoPlayer> {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 16.0),
                               child: Text(
-                                widget.videoDetail['videoAuthor'],
+                                widget.videoDetail.author!,
                                 style: const TextStyle(
-                                    //color: kVideoPagelvlText,
                                     fontFamily: 'Red Hat Display',
                                     fontSize: 18),
                               ),
@@ -201,12 +193,12 @@ class _YoutubeVideoPlayerState extends State<YoutubeVideoPlayer> {
                               height: 30,
                             ),
                             Container(
-                                padding: const EdgeInsets.all(8),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 18),
                                 width: MediaQuery.of(context).size.width * 0.9,
                                 child: Text(
-                                  widget.videoDetail['description'],
+                                  widget.videoDetail.description!,
                                   style: const TextStyle(
-                                      //color: kVideoPAgeTextColor,
                                       fontFamily: 'Red Hat Display',
                                       fontSize: 16),
                                 ))

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:paddyway_academy/models/document_model.dart';
 import 'package:paddyway_academy/pages/all_videos_page.dart';
+import 'package:paddyway_academy/widgets/document_card.dart';
 import 'package:paddyway_academy/widgets/youtube_video_card.dart';
 
 class LessonSection extends StatelessWidget {
@@ -8,7 +10,6 @@ class LessonSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(lesson);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -19,14 +20,20 @@ class LessonSection extends StatelessWidget {
             ),
             Text(
               lesson['title'],
-              style: const TextStyle(fontSize: 18),
+              style: const TextStyle(
+                fontSize: 18,
+              ),
             ),
             Expanded(
               child: Container(
-                margin: const EdgeInsets.symmetric(horizontal: 20),
+                margin: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                ),
                 height: 2,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(
+                    20,
+                  ),
                   color: Colors.white,
                 ),
               ),
@@ -34,22 +41,30 @@ class LessonSection extends StatelessWidget {
           ],
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
+          padding: const EdgeInsets.symmetric(
+            horizontal: 20.0,
+            vertical: 20,
+          ),
           child: Row(
             children: [
               const Text(
                 "Videos",
-                style: TextStyle(fontSize: 20),
+                style: TextStyle(
+                  fontSize: 20,
+                ),
               ),
               const Spacer(),
               GestureDetector(
                 onTap: () {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => AllVideosPage(
-                              videos: lesson['videos'],
-                              title: lesson['title'])));
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AllItemsPage(
+                        itemsList: lesson['videos'],
+                        title: lesson['title'],
+                      ),
+                    ),
+                  );
                 },
                 child: const Icon(
                   Icons.arrow_forward_ios_outlined,
@@ -64,14 +79,75 @@ class LessonSection extends StatelessWidget {
           child: SizedBox(
             height: 190,
             child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: lesson['videos'].length,
-                //lesson['videos'].length > 5 ? 5 : lesson['videos'].length,
-                itemBuilder: (context, index) {
-                  return YoutubeVideoCard(videoData: lesson['videos'][index]);
-                }),
+              scrollDirection: Axis.horizontal,
+              itemCount: lesson['videos'].length,
+              //lesson['videos'].length > 5 ? 5 : lesson['videos'].length,
+              itemBuilder: (context, index) {
+                return YoutubeVideoCard(
+                  videoData: lesson['videos'][index],
+                );
+              },
+            ),
           ),
-        )
+        ),
+        if (lesson['documents'].isNotEmpty)
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 20.0,
+              vertical: 20,
+            ),
+            child: Row(
+              children: [
+                const Text(
+                  "Documents",
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+                const Spacer(),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AllItemsPage(
+                          itemsList: lesson['documents'],
+                          title: lesson['title'],
+                          type: "doc",
+                        ),
+                      ),
+                    );
+                  },
+                  child: const Icon(
+                    Icons.arrow_forward_ios_outlined,
+                    size: 20,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        if (lesson['documents'].isNotEmpty)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 20),
+            child: SizedBox(
+              height: lesson['documents'].length > 2 ? 190 : 90,
+              child: GridView.count(
+                crossAxisCount: lesson['documents'].length > 2 ? 2 : 1,
+                scrollDirection: Axis.horizontal,
+                childAspectRatio: 1 / 3,
+                crossAxisSpacing: 10,
+                children: [
+                  for (DocumentModel doc in lesson['documents'])
+                    DocumentCard(
+                      document: doc,
+                    ),
+                ],
+              ),
+            ),
+          ),
+        const SizedBox(
+          height: 50,
+        ),
       ],
     );
   }
