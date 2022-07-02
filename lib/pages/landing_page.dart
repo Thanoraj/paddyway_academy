@@ -125,7 +125,7 @@ class LandingPage extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              const TeachByWidget(),
+              const Center(child: TeachByWidget()),
               const SizedBox(
                 height: 25,
               ),

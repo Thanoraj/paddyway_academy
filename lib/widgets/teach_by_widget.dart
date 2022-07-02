@@ -7,6 +7,7 @@ class TeachByWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SizedBox(
           width: 75,
@@ -20,7 +21,7 @@ class TeachByWidget extends StatelessWidget {
           width: 10,
         ),
         SizedBox(
-          height: 75,
+          height: 80,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -36,7 +37,9 @@ class TeachByWidget extends StatelessWidget {
                     fontWeight: FontWeight.bold),
               ),
               SizedBox(
-                width: MediaQuery.of(context).size.width - 125,
+                width: MediaQuery.of(context).size.width > 400
+                    ? 275
+                    : MediaQuery.of(context).size.width - 125,
                 child: FittedBox(
                   fit: BoxFit.scaleDown,
                   alignment: Alignment.centerLeft,
@@ -46,9 +49,15 @@ class TeachByWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              Text(
-                teachByText4,
-                style: TextStyle(fontSize: 13, color: Colors.yellow[400]),
+              SizedBox(
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    teachByText4,
+                    style: TextStyle(fontSize: 13, color: Colors.yellow[400]),
+                  ),
+                ),
               ),
             ],
           ),
