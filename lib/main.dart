@@ -7,7 +7,7 @@ import 'package:permission_handler/permission_handler.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await gitFirebase.initializeApp();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
