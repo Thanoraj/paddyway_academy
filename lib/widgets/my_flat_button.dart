@@ -6,10 +6,12 @@ class MyFlatButton extends StatelessWidget {
     required this.child,
     this.color = const Color(0xff6c609c),
     required this.onTap,
+    this.radius,
   }) : super(key: key);
   final Widget child;
   final Color color;
   final Function onTap;
+  final double? radius;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class MyFlatButton extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12), color: color),
+            borderRadius: BorderRadius.circular(radius ?? 12), color: color),
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
         child: child,
       ),

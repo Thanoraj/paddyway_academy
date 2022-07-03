@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:paddyway_academy/pages/all_videos_page.dart';
+import 'package:paddyway_academy/pages/home_page.dart';
+import 'package:paddyway_academy/pages/section_page.dart';
 
 import 'my_flat_button.dart';
 
 class UnitCard extends StatelessWidget {
-  const UnitCard({Key? key}) : super(key: key);
+  const UnitCard({Key? key, required this.unit}) : super(key: key);
+  final Map unit;
 
   @override
   Widget build(BuildContext context) {
@@ -19,11 +21,11 @@ class UnitCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8.0),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Text(
-                "Unit name",
-                style: TextStyle(color: Colors.white70, fontSize: 16),
+                unit['unit'],
+                style: const TextStyle(color: Colors.white70, fontSize: 16),
               ),
             ),
             const SizedBox(
@@ -32,13 +34,12 @@ class UnitCard extends StatelessWidget {
             Center(
               child: MyFlatButton(
                 onTap: () {
+                  selectedUnit = unit['unit'];
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const AllItemsPage(
-                                title: '123',
-                                itemsList: [],
-                              )));
+                          builder: (context) => SectionsPage(
+                              sections: unit['sections'], unit: unit["unit"])));
                 },
                 child: Row(
                   mainAxisSize: MainAxisSize.min,

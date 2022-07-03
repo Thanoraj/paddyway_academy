@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:paddyway_academy/models/document_model.dart';
+import 'package:paddyway_academy/pages/home_page.dart';
 
 import '../services/firebase/firebase_storage.dart';
 
 class DocumentCard extends StatelessWidget {
   const DocumentCard({Key? key, required this.document}) : super(key: key);
-  final DocumentModel document;
+  final Map document;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -28,13 +29,17 @@ class DocumentCard extends StatelessWidget {
               ),
               Expanded(
                 child: Text(
-                  document.name,
+                  document['name'],
                   style: const TextStyle(color: Colors.black),
                 ),
               ),
               GestureDetector(
                 onTap: () {
-                  FireStorage.downloadDoc(context, document);
+                  DocumentModel doc = DocumentModel();
+                  doc.lesson = selectedUnit!;
+                  doc.name = document['name'];
+                  doc.url = document['url'];
+                  doc.lesson = FireStorage.downloadDoc(context, doc);
                 },
                 child: const Icon(
                   Icons.download,

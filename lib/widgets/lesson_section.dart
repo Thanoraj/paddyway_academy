@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:paddyway_academy/models/document_model.dart';
 import 'package:paddyway_academy/pages/all_videos_page.dart';
-import 'package:paddyway_academy/widgets/document_card.dart';
 import 'package:paddyway_academy/widgets/youtube_video_card.dart';
 
 class LessonSection extends StatelessWidget {
@@ -60,8 +58,8 @@ class LessonSection extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) => AllItemsPage(
-                        itemsList: lesson['videos'],
-                        title: lesson['title'],
+                        //itemsList: lesson['videos'],
+                        title: lesson['title'], unit: '',
                       ),
                     ),
                   );
@@ -111,9 +109,9 @@ class LessonSection extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) => AllItemsPage(
-                          itemsList: lesson['documents'],
+                          // itemsList: lesson['documents'],
                           title: lesson['title'],
-                          type: "doc",
+                          type: "doc", unit: '',
                         ),
                       ),
                     );
@@ -137,10 +135,10 @@ class LessonSection extends StatelessWidget {
                 childAspectRatio: 1 / 3,
                 crossAxisSpacing: 10,
                 children: [
-                  for (DocumentModel doc in lesson['documents'])
-                    DocumentCard(
-                      document: doc,
-                    ),
+                  // for (DocumentModel doc in lesson['documents'])
+                  //   DocumentCard(
+                  //     document: doc,
+                  //   ),
                 ],
               ),
             ),

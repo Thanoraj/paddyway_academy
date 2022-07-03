@@ -3,6 +3,8 @@ import 'package:paddyway_academy/pages/landing_page.dart';
 import 'package:paddyway_academy/widgets/contact_us_button.dart';
 import 'package:paddyway_academy/widgets/unit_card.dart';
 
+String? selectedUnit;
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -30,7 +32,9 @@ class _HomePageState extends State<HomePage> {
           ? ListView(
               children: [
                 for (Map subject in currentUser!.allowedSubjects!)
-                  const UnitCard(),
+                  UnitCard(
+                    unit: subject,
+                  ),
               ],
             )
           : Column(

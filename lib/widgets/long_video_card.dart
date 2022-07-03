@@ -4,18 +4,25 @@ import 'package:paddyway_academy/pages/youtube_video_player.dart';
 
 class LongVideoCard extends StatelessWidget {
   const LongVideoCard({Key? key, required this.videoInfo}) : super(key: key);
-  final YoutubeVideoModel videoInfo;
+  final Map videoInfo;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: GestureDetector(
         onTap: () {
+          YoutubeVideoModel videoModel = YoutubeVideoModel();
+          videoModel.title = videoInfo['videoTitle'];
+          videoModel.author = videoInfo['videoAuthor'];
+          videoModel.duration = videoInfo['duration'];
+          videoModel.thumbnail = videoInfo['thumbnails'];
+          videoModel.description = videoInfo['description'];
+          videoModel.id = videoInfo['id'];
           Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) => YoutubeVideoPlayer(
-                videoDetail: videoInfo,
+                videoDetail: videoModel,
               ),
             ),
           );
@@ -34,7 +41,7 @@ class LongVideoCard extends StatelessWidget {
                     bottomLeft: Radius.circular(15),
                   ),
                   child: Image.network(
-                    videoInfo.thumbnail!,
+                    videoInfo['thumbnails'],
                     height: 100,
                     fit: BoxFit.fitHeight,
                   ),
@@ -48,7 +55,7 @@ class LongVideoCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text(
-                        videoInfo.title!,
+                        videoInfo['videoTitle'],
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(fontSize: 16),
                       ),
@@ -62,14 +69,14 @@ class LongVideoCard extends StatelessWidget {
                             width: 5,
                           ),
                           Text(
-                            videoInfo.duration!,
+                            videoInfo['duration'],
                             style: const TextStyle(fontSize: 13),
                           ),
                         ],
                       ),
                       Container(
                         child: Text(
-                          videoInfo.author!,
+                          videoInfo['videoAuthor'],
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: const TextStyle(fontSize: 14),
