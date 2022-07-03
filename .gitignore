@@ -48,3 +48,4 @@ app.*.map.json
 #secret files
 /lib/secrets.dart
 /android/app/google-services.json
+/web/firebase-config.js

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:paddyway_academy/constants.dart';
-import 'package:paddyway_academy/services/firebase/firestore.dart';
 import 'package:paddyway_academy/widgets/teach_by_widget.dart';
 
 import '../models/user.dart';
+import '../services/firebase/firestore.dart';
 import '../widgets/contact_us_button.dart';
 import '../widgets/submit_button.dart';
 import 'home_page.dart';
@@ -111,6 +111,7 @@ class LandingPage extends StatelessWidget {
               ),
               SubmitButton(
                 onPressed: () async {
+                  //DatabaseManagement.changeVideoLocation();
                   if (_formKey.currentState!.validate()) {
                     await Firestore.validateUser(userId);
                     Navigator.push(

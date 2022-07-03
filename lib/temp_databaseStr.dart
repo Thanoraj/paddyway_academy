@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 Map user = {
   "123456": {
     "Name": "Thanoraj",
@@ -201,3 +203,37 @@ Map lessons = {
     ]
   },
 };
+
+class DatabaseManagement {
+  static changeVideoLocation() async {
+    List lessons = ["U1", 'U2', 'U3', 'U4', 'U5'];
+    for (String lesson in lessons) {
+      List documents = [];
+      List videos = [];
+      await FirebaseFirestore.instance
+          .collection("lessons")
+          .doc(lesson)
+          .get()
+          .then((value) async {
+        documents = value.data()!['documents'];
+        videos = value.data()!['videos'];
+        print(documents);
+        print(videos);
+        for (int i = 1; i < 7; i++) {
+          await FirebaseFirestore.instance
+              .collection("lessons")
+              .doc(lesson)
+              .collection("section$i")
+              .doc("videos")
+              .set({"videos": videos});
+          await FirebaseFirestore.instance
+              .collection("lessons")
+              .doc(lesson)
+              .collection("section$i")
+              .doc("documents")
+              .set({"documents": documents});
+        }
+      });
+    }
+  }
+}

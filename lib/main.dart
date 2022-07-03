@@ -6,7 +6,6 @@ import 'package:permission_handler/permission_handler.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   await Firebase.initializeApp();
   runApp(const MyApp());
 }
@@ -22,7 +21,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    getPermissions();
+    if (!kIsWeb) getPermissions();
   }
 
   getPermissions() async {
@@ -41,10 +40,10 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        brightness: Brightness.dark,
-        scaffoldBackgroundColor: Colors.black,
-      ),
+          primarySwatch: Colors.blue,
+          brightness: Brightness.dark,
+          scaffoldBackgroundColor: Colors.black,
+          appBarTheme: AppBarTheme(color: Color(0x171616FF))),
       home: LandingPage(),
     );
   }

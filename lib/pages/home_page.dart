@@ -1,11 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:paddyway_academy/models/document_model.dart';
-import 'package:paddyway_academy/models/youtube_video.dart';
 import 'package:paddyway_academy/pages/landing_page.dart';
 import 'package:paddyway_academy/widgets/contact_us_button.dart';
-
-import '../widgets/lesson_section.dart';
+import 'package:paddyway_academy/widgets/unit_card.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -15,50 +11,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late Future _getLesson;
+  late Future<List> _getLesson;
   @override
   initState() {
-    if (currentUser != null) _getLesson = getLessons();
+    //if (currentUser != null) _getLesson = Firestore.getLessons();
     super.initState();
   }
 
   List onGoingLessons = [];
-
-  getLessons() async {
-    for (String subjectId in currentUser!.allowedSubjects!) {
-      await FirebaseFirestore.instance
-          .collection("lessons")
-          .doc(subjectId)
-          .get()
-          .then((value) {
-        List videos = [];
-        List documents = [];
-        for (Map videoInfo in value.data()!["videos"]) {
-          YoutubeVideoModel video = YoutubeVideoModel();
-          video.id = videoInfo['id'];
-          video.title = videoInfo['videoTitle'];
-          video.duration = videoInfo['duration'];
-          video.description = videoInfo['description'];
-          video.author = videoInfo['videoAuthor'];
-          video.thumbnail = videoInfo['thumbnails'];
-          videos.add(video);
-        }
-        for (Map document in value.data()!['documents']) {
-          DocumentModel doc = DocumentModel();
-          doc.name = document['name'];
-          doc.url = document['url'];
-          doc.lesson = subjectId;
-          documents.add(doc);
-        }
-        onGoingLessons.add({
-          'title': value.data()!['title'],
-          'videos': videos,
-          'documents': documents,
-        });
-      });
-    }
-    return onGoingLessons.isNotEmpty;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +27,31 @@ class _HomePageState extends State<HomePage> {
         title: const Text("Your ongoing classes"),
       ),
       body: currentUser != null
-          ? FutureBuilder(
+          ? ListView(
+              children: [
+                for (Map subject in currentUser!.allowedSubjects!)
+                  const UnitCard(),
+              ],
+            )
+          : Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Text(
+                  "There are no lessons available for you,\n for more information",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 18),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                ContactUsButton(),
+              ],
+            ),
+    );
+  }
+}
+
+/*FutureBuilder(
               future: _getLesson,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done &&
@@ -91,21 +75,4 @@ class _HomePageState extends State<HomePage> {
                   ));
                 }
               },
-            )
-          : Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Text(
-                  "There are no lessons available for you,\n for more information",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 18),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                ContactUsButton(),
-              ],
-            ),
-    );
-  }
-}
+            )*/
