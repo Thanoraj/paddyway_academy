@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:paddyway_academy/constants.dart';
 import 'package:paddyway_academy/services/user_management.dart';
+import 'package:paddyway_academy/theme_info.dart';
 import 'package:paddyway_academy/widgets/teach_by_widget.dart';
 
 import '../models/user_model.dart';
@@ -18,7 +19,6 @@ class LandingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Form(
@@ -30,10 +30,10 @@ class LandingPage extends StatelessWidget {
               ),
               Text(
                 appWelcomeText,
-                style: const TextStyle(
+                style: TextStyle(
                     fontSize: 38,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white),
+                    color: ThemeInfo.primaryTextColor),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(
@@ -44,7 +44,7 @@ class LandingPage extends StatelessWidget {
                   width: 150,
                   height: 150,
                   child: Image.asset(
-                    "assets/images/logo.png",
+                    logo,
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -54,7 +54,8 @@ class LandingPage extends StatelessWidget {
               ),
               Text(
                 codeText,
-                style: const TextStyle(fontSize: 20, color: Colors.white),
+                style:
+                    TextStyle(fontSize: 20, color: ThemeInfo.primaryTextColor),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(
@@ -65,7 +66,7 @@ class LandingPage extends StatelessWidget {
                   width: 150,
                   child: TextFormField(
                     validator: (String? val) {
-                      if (val!.isEmpty) return "Please enter you code";
+                      if (val!.isEmpty) return emptySubmitText;
                       return null;
                     },
                     onChanged: (val) {
@@ -76,32 +77,14 @@ class LandingPage extends StatelessWidget {
                       letterSpacing: 4,
                     ),
                     textAlign: TextAlign.center,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       hintStyle: TextStyle(
                         fontSize: 20,
-                        color: Colors.white,
+                        color: ThemeInfo.primaryTextColor,
                       ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.white54, width: 1.0),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10.0),
-                        ),
-                      ),
-                      border: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.white54, width: 1.0),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10.0),
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Colors.white54, width: 1.0),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10.0),
-                        ),
-                      ),
+                      enabledBorder: ThemeInfo.textBoxBorder,
+                      border: ThemeInfo.textBoxBorder,
+                      focusedBorder: ThemeInfo.textBoxBorder,
                     ),
                   ),
                 ),
@@ -132,7 +115,7 @@ class LandingPage extends StatelessWidget {
               Center(
                 child: Text(
                   contactUsText,
-                  style: const TextStyle(color: Colors.white, fontSize: 18),
+                  style: const TextStyle(fontSize: 18),
                 ),
               ),
               const ContactUsButton(),

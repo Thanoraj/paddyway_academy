@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:paddyway_academy/theme_info.dart';
 
 import '../constants.dart';
 
@@ -32,8 +33,8 @@ class _SubmitButtonState extends State<SubmitButton> {
           height: 50,
           child: Center(
             child: isLoading
-                ? const CircularProgressIndicator(
-                    color: Colors.white,
+                ? CircularProgressIndicator(
+                    color: ThemeInfo.primaryLightColor,
                   )
                 : Text(
                     submitButtonText,

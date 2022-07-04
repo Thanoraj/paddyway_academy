@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:paddyway_academy/constants.dart';
 import 'package:paddyway_academy/models/document_model.dart';
 import 'package:paddyway_academy/pages/home_page.dart';
+import 'package:paddyway_academy/theme_info.dart';
 
 import '../services/firebase/firebase_storage.dart';
 
@@ -14,7 +16,7 @@ class DocumentCard extends StatelessWidget {
       child: SizedBox(
         height: 100,
         child: Material(
-          color: Colors.grey[500],
+          color: ThemeInfo.secondaryCardColor,
           elevation: 5,
           borderRadius: BorderRadius.circular(10),
           child: Row(
@@ -25,12 +27,12 @@ class DocumentCard extends StatelessWidget {
               Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: 18.0, horizontal: 8),
-                child: Image.asset("assets/images/pdf icon.png"),
+                child: Image.asset(pdfIcon),
               ),
               Expanded(
                 child: Text(
                   document['name'],
-                  style: const TextStyle(color: Colors.black),
+                  style: TextStyle(color: ThemeInfo.contrastPrimaryTextColor),
                 ),
               ),
               GestureDetector(
@@ -41,9 +43,9 @@ class DocumentCard extends StatelessWidget {
                   doc.url = document['url'];
                   doc.lesson = FireStorage.downloadDoc(context, doc);
                 },
-                child: const Icon(
+                child: Icon(
                   Icons.download,
-                  color: Colors.red,
+                  color: ThemeInfo.downloadIconColor,
                   size: 30,
                 ),
               ),

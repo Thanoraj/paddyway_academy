@@ -1,7 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:paddyway_academy/models/youtube_video.dart';
 import 'package:paddyway_academy/pages/youtube_video_player.dart';
+import 'package:paddyway_academy/theme_info.dart';
 
 class LongVideoCard extends StatelessWidget {
   const LongVideoCard({Key? key, required this.videoInfo}) : super(key: key);
@@ -30,7 +30,7 @@ class LongVideoCard extends StatelessWidget {
         },
         child: Material(
           borderRadius: BorderRadius.circular(15),
-          color: Colors.grey[800],
+          color: ThemeInfo.cardColor,
           elevation: 5,
           child: SizedBox(
             height: 100,
@@ -51,15 +51,22 @@ class LongVideoCard extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
+                          children: [
                             Text(
                               "😟",
-                              style: TextStyle(fontSize: 18),
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  color: ThemeInfo.primaryTextColor),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
-                            Text("Error occurred!"),
+                            Text(
+                              "Error occurred!",
+                              style: TextStyle(
+                                color: ThemeInfo.primaryTextColor,
+                              ),
+                            ),
                           ],
                         ),
                       );
@@ -77,29 +84,37 @@ class LongVideoCard extends StatelessWidget {
                       Text(
                         videoInfo['videoTitle'],
                         overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(fontSize: 16),
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: ThemeInfo.primaryTextColor,
+                        ),
                       ),
                       Row(
                         children: [
-                          const Icon(
+                          Icon(
                             Icons.timer_outlined,
                             size: 15,
+                            color: ThemeInfo.primaryTextColor,
                           ),
                           const SizedBox(
                             width: 5,
                           ),
                           Text(
                             videoInfo['duration'],
-                            style: const TextStyle(fontSize: 13),
+                            style: TextStyle(
+                              fontSize: 13,
+                              color: ThemeInfo.primaryTextColor,
+                            ),
                           ),
                         ],
                       ),
-                      Container(
-                        child: Text(
-                          videoInfo['videoAuthor'],
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(fontSize: 14),
+                      Text(
+                        videoInfo['videoAuthor'],
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: ThemeInfo.primaryTextColor,
                         ),
                       ),
                     ],

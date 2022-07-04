@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:paddyway_academy/constants.dart';
 import 'package:paddyway_academy/pages/home_page.dart';
 import 'package:paddyway_academy/pages/section_page.dart';
+import 'package:paddyway_academy/theme_info.dart';
 
 import 'my_flat_button.dart';
 
@@ -15,7 +17,7 @@ class UnitCard extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          color: const Color(0xff191c2d),
+          color: ThemeInfo.cardColor,
         ),
         padding: const EdgeInsets.all(15),
         child: Column(
@@ -25,7 +27,8 @@ class UnitCard extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Text(
                 unit['unit'],
-                style: const TextStyle(color: Colors.white70, fontSize: 16),
+                style: TextStyle(
+                    color: ThemeInfo.secondaryTextColor, fontSize: 16),
               ),
             ),
             const SizedBox(
@@ -43,18 +46,16 @@ class UnitCard extends StatelessWidget {
                 },
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
-                  children: const [
+                  children: [
                     Text(
-                      "View sections",
-                      style: TextStyle(color: Colors.white),
+                      sectionCardButtonText,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 5,
                     ),
-                    Icon(
+                    const Icon(
                       Icons.arrow_forward,
                       size: 15,
-                      color: Colors.white,
                     )
                   ],
                 ),

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:paddyway_academy/constants.dart';
 import 'package:paddyway_academy/theme_info.dart';
@@ -17,14 +16,18 @@ class YoutubeChannelCard extends StatelessWidget {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 20),
             child: Text(
               youtubeChannelText,
-              style: const TextStyle(color: Colors.white70, fontSize: 16),
+              style: TextStyle(
+                color: ThemeInfo.secondaryTextColor,
+                fontSize: 16,
+              ),
+              textAlign: TextAlign.center,
             ),
           ),
           Container(
-            decoration: const BoxDecoration(color: Color(0xfff5f5f5)),
+            decoration: BoxDecoration(color: ThemeInfo.youtubeChannelBgColor),
             padding: const EdgeInsets.all(5),
             margin: const EdgeInsets.all(10),
             child: Row(
@@ -32,18 +35,15 @@ class YoutubeChannelCard extends StatelessWidget {
                 Material(
                   elevation: 5,
                   borderRadius: BorderRadius.circular(5),
-                  color: Colors.white,
+                  color: ThemeInfo.primaryLightColor,
                   child: Padding(
                     padding: const EdgeInsets.all(5),
-                    child: Container(
-                      color: Colors.black,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(5),
-                        child: Image.asset(
-                          "assets/images/channel_logo.jpg",
-                          width: 100,
-                          height: 100,
-                        ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(5),
+                      child: Image.asset(
+                        channelLogo,
+                        width: 100,
+                        height: 100,
                       ),
                     ),
                   ),
@@ -57,9 +57,11 @@ class YoutubeChannelCard extends StatelessWidget {
                       width: MediaQuery.of(context).size.width - 190,
                       child: FittedBox(
                         fit: BoxFit.scaleDown,
-                        child: const Text(
-                          "Paddyway Academy",
-                          style: TextStyle(color: Colors.black87, fontSize: 20),
+                        child: Text(
+                          channelName,
+                          style: TextStyle(
+                              color: ThemeInfo.contrastSecondaryTextColor,
+                              fontSize: 20),
                         ),
                       ),
                     ),
@@ -70,24 +72,23 @@ class YoutubeChannelCard extends StatelessWidget {
                         onPressed: () {
                           launchUrl(
                               Uri.parse(
-                                  "https://youtube.com/c/paddywayacademy"),
+                                channelUrl,
+                              ),
                               mode: LaunchMode.externalApplication);
                         },
                         style: ElevatedButton.styleFrom(
-                          primary: const Color(0xffff3f3f),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                        ),
+                            primary: ThemeInfo.channelWatchVideoButtonColor,
+                            shape: ThemeInfo.channelButtonBorder),
                         child: Padding(
-                          padding: EdgeInsets.symmetric(
+                          padding: const EdgeInsets.symmetric(
                               horizontal: 15, vertical: 10),
                           child: SizedBox(
                             width: MediaQuery.of(context).size.width - 270,
                             child: FittedBox(
                               fit: BoxFit.scaleDown,
                               child: Text(
-                                "Watch videos",
-                                style: TextStyle(fontSize: 18),
+                                channelButtonText,
+                                style: const TextStyle(fontSize: 18),
                               ),
                             ),
                           ),

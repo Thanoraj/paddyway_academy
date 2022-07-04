@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:paddyway_academy/constants.dart';
+import 'package:paddyway_academy/theme_info.dart';
 
 class TeachByWidget extends StatelessWidget {
   const TeachByWidget({Key? key}) : super(key: key);
@@ -13,7 +14,7 @@ class TeachByWidget extends StatelessWidget {
           width: 75,
           height: 75,
           child: Image.asset(
-            "assets/images/sajith.png",
+            teachByImage,
             fit: BoxFit.fill,
           ),
         ),
@@ -27,13 +28,14 @@ class TeachByWidget extends StatelessWidget {
             children: [
               Text(
                 teachByText1,
-                style: TextStyle(fontSize: 15, color: Colors.yellow[400]),
+                style: TextStyle(
+                    fontSize: 15, color: ThemeInfo.teachByTextContrastColor),
               ),
               Text(
                 teachByText2,
-                style: const TextStyle(
+                style: TextStyle(
                     fontSize: 18,
-                    color: Colors.white,
+                    color: ThemeInfo.primaryTextColor,
                     fontWeight: FontWeight.bold),
               ),
               SizedBox(
@@ -45,7 +47,9 @@ class TeachByWidget extends StatelessWidget {
                   alignment: Alignment.centerLeft,
                   child: Text(
                     teachByText3,
-                    style: TextStyle(fontSize: 13, color: Colors.yellow[400]),
+                    style: TextStyle(
+                        fontSize: 13,
+                        color: ThemeInfo.teachByTextContrastColor),
                   ),
                 ),
               ),
@@ -55,7 +59,9 @@ class TeachByWidget extends StatelessWidget {
                   alignment: Alignment.centerLeft,
                   child: Text(
                     teachByText4,
-                    style: TextStyle(fontSize: 13, color: Colors.yellow[400]),
+                    style: TextStyle(
+                        fontSize: 13,
+                        color: ThemeInfo.teachByTextContrastColor),
                   ),
                 ),
               ),

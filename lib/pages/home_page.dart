@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:paddyway_academy/constants.dart';
 import 'package:paddyway_academy/pages/landing_page.dart';
+import 'package:paddyway_academy/theme_info.dart';
 import 'package:paddyway_academy/widgets/contact_us_button.dart';
 import 'package:paddyway_academy/widgets/unit_card.dart';
 import 'package:paddyway_academy/widgets/youtube_channel_card.dart';
@@ -16,11 +17,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   @override
-  initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: currentUser != null
@@ -35,8 +31,10 @@ class _HomePageState extends State<HomePage> {
                     ),
                     child: Text(
                       hiText,
-                      style:
-                          const TextStyle(color: Colors.white70, fontSize: 25),
+                      style: TextStyle(
+                        color: ThemeInfo.secondaryTextColor,
+                        fontSize: 25,
+                      ),
                     ),
                   ),
                   Expanded(
@@ -45,11 +43,15 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         Padding(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 10),
+                            horizontal: 20,
+                            vertical: 10,
+                          ),
                           child: Text(
                             currentTaskText,
-                            style: const TextStyle(
-                                color: Colors.white, fontSize: 20),
+                            style: TextStyle(
+                              color: ThemeInfo.primaryTextColor,
+                              fontSize: 20,
+                            ),
                           ),
                         ),
                         for (Map subject in currentUser!.allowedSubjects!)

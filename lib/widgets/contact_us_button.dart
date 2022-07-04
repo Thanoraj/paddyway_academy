@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../constants.dart';
-import '../secrets.dart';
 
 class ContactUsButton extends StatelessWidget {
   const ContactUsButton({
@@ -14,7 +13,7 @@ class ContactUsButton extends StatelessWidget {
     return Center(
       child: ElevatedButton(
           onPressed: () async {
-            await launchUrl(Uri.parse("whatsapp://send?phone=$waNumber"));
+            await launchUrl(Uri.parse(waURL));
           },
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),

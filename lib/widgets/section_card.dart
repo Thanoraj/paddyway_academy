@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:paddyway_academy/constants.dart';
 import 'package:paddyway_academy/pages/all_videos_page.dart';
+import 'package:paddyway_academy/theme_info.dart';
 
 import 'my_flat_button.dart';
 
@@ -16,7 +18,7 @@ class SectionCard extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          color: const Color(0xff191c2d),
+          color: ThemeInfo.cardColor,
         ),
         padding: const EdgeInsets.all(15),
         child: Column(
@@ -26,7 +28,8 @@ class SectionCard extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Text(
                 sectionName,
-                style: const TextStyle(color: Colors.white70, fontSize: 16),
+                style: TextStyle(
+                    color: ThemeInfo.secondaryTextColor, fontSize: 16),
               ),
             ),
             const SizedBox(
@@ -47,18 +50,16 @@ class SectionCard extends StatelessWidget {
                                         unit: unitId,
                                       )));
                         },
-                        color: Color(0xffe86c6c),
+                        color: ThemeInfo.sectionVideoButtonColor,
                         child: Text(
-                          "View All Videos",
-                          style: TextStyle(color: Colors.white),
+                          sectionVideoButtonText,
                         ),
                       ),
                       MyFlatButton(
                         radius: 30,
-                        color: Color(0xff6ca1e7),
-                        child: const Text(
-                          "View All e-Notes",
-                          style: TextStyle(color: Colors.white),
+                        color: ThemeInfo.sectionDocumentsButtonColor,
+                        child: Text(
+                          sectionDocumentsButtonText,
                         ),
                         onTap: () {
                           Navigator.push(
@@ -87,10 +88,9 @@ class SectionCard extends StatelessWidget {
                                           unit: unitId,
                                         )));
                           },
-                          color: const Color(0xffe86c6c),
-                          child: const Text(
-                            " View All Videos ",
-                            style: TextStyle(color: Colors.white),
+                          color: ThemeInfo.sectionVideoButtonColor,
+                          child: Text(
+                            sectionVideoButtonText,
                           ),
                         ),
                         const SizedBox(
@@ -98,10 +98,9 @@ class SectionCard extends StatelessWidget {
                         ),
                         MyFlatButton(
                           radius: 30,
-                          color: const Color(0xff6ca1e7),
-                          child: const Text(
-                            "View All e-Notes",
-                            style: TextStyle(color: Colors.white),
+                          color: ThemeInfo.sectionDocumentsButtonColor,
+                          child: Text(
+                            sectionDocumentsButtonText,
                           ),
                           onTap: () {
                             Navigator.push(

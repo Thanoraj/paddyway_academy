@@ -217,8 +217,6 @@ class DatabaseManagement {
           .then((value) async {
         documents = value.data()!['documents'];
         videos = value.data()!['videos'];
-        print(documents);
-        print(videos);
         for (int i = 1; i < 7; i++) {
           await FirebaseFirestore.instance
               .collection("lessons")
