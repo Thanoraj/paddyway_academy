@@ -1,4 +1,4 @@
-class User {
+class UserModel {
   String? name;
   String? id;
   String? year;

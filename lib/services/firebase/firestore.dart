@@ -2,11 +2,32 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:paddyway_academy/pages/landing_page.dart';
 
 import '../../models/document_model.dart';
-import '../../models/user.dart';
+import '../../models/user_model.dart';
 import '../../models/youtube_video.dart';
 
 class Firestore {
-  static validateUser(String userId) async {
+  static Future<bool?> checkValidity(String userID) async {
+    bool? validity;
+    await FirebaseFirestore.instance
+        .collection("users")
+        .doc(userID)
+        .get()
+        .then((value) {
+      if (value.data() != null) {
+        validity = value.data()!['isValid'];
+      }
+    });
+    return validity;
+  }
+
+  static Future updateValidity(String userID) async {
+    await FirebaseFirestore.instance
+        .collection("users")
+        .doc(userID)
+        .update({"isValid": false});
+  }
+
+  static fetchUserData(String userId) async {
     if (userId != "") {
       await FirebaseFirestore.instance
           .collection("users")
@@ -15,7 +36,7 @@ class Firestore {
           .then((value) {
         print(value.data());
         if (value.data() != null) {
-          currentUser = User();
+          currentUser = UserModel();
           currentUser!.id = value.data()!['id'];
           currentUser!.name = value.data()!['name'];
           currentUser!.year = value.data()!['class'];
@@ -40,6 +61,14 @@ class Firestore {
       print(i + 1);
     });
     print("completed");
+  }
+
+  static Future saveFalseAttempt(String userID) async {
+    String time = DateTime.now().toString();
+    await FirebaseFirestore.instance
+        .collection("False attempts")
+        .doc(time)
+        .set({'id': userID, 'time': time});
   }
 
   static Future<List> getLessons() async {

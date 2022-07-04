@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:paddyway_academy/constants.dart';
+import 'package:paddyway_academy/services/user_management.dart';
 import 'package:paddyway_academy/widgets/teach_by_widget.dart';
 
-import '../models/user.dart';
-import '../services/firebase/firestore.dart';
+import '../models/user_model.dart';
 import '../widgets/contact_us_button.dart';
 import '../widgets/submit_button.dart';
 import 'home_page.dart';
 
-User? currentUser;
-String userId = '';
+UserModel? currentUser;
+String userID = '';
 
 class LandingPage extends StatelessWidget {
   LandingPage({Key? key}) : super(key: key);
@@ -69,7 +69,7 @@ class LandingPage extends StatelessWidget {
                       return null;
                     },
                     onChanged: (val) {
-                      userId = val.trim();
+                      userID = val.trim();
                     },
                     style: const TextStyle(
                       fontSize: 20,
@@ -113,7 +113,7 @@ class LandingPage extends StatelessWidget {
                 onPressed: () async {
                   //DatabaseManagement.changeVideoLocation();
                   if (_formKey.currentState!.validate()) {
-                    await Firestore.validateUser(userId);
+                    await UserManager.validateUser(userID);
                     Navigator.push(
                       context,
                       MaterialPageRoute(
