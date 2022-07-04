@@ -1,5 +1,9 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_windowmanager/flutter_windowmanager.dart';
 import 'package:paddyway_academy/models/youtube_video.dart';
 import 'package:paddyway_academy/theme_info.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
@@ -21,6 +25,7 @@ class _YoutubeVideoPlayerState extends State<YoutubeVideoPlayer> {
 
   @override
   void initState() {
+    toggleScreenSecurity(true);
     videoId = YoutubePlayer.convertUrlToId(widget.videoDetail.id!)!;
     super.initState();
     _controller = YoutubePlayerController(
@@ -39,6 +44,19 @@ class _YoutubeVideoPlayerState extends State<YoutubeVideoPlayer> {
     _seekToController = TextEditingController();
   }
 
+  void toggleScreenSecurity(bool secure) async {
+    if (!kIsWeb) {
+      if (Platform.isAndroid) {
+        if (secure) {
+          await FlutterWindowManager.addFlags(FlutterWindowManager.FLAG_SECURE);
+        } else {
+          await FlutterWindowManager.clearFlags(
+              FlutterWindowManager.FLAG_SECURE);
+        }
+      }
+    }
+  }
+
   void listener() {
     if (_isPlayerReady && mounted && !_controller.value.isFullScreen) {}
   }
@@ -51,6 +69,7 @@ class _YoutubeVideoPlayerState extends State<YoutubeVideoPlayer> {
 
   @override
   void dispose() {
+    toggleScreenSecurity(false);
     _controller.dispose();
     _idController.dispose();
     _seekToController.dispose();

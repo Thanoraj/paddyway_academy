@@ -13,10 +13,15 @@ class UnitCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8),
+      padding: const EdgeInsets.symmetric(
+        horizontal: 20.0,
+        vertical: 8,
+      ),
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(
+            15,
+          ),
           color: ThemeInfo.cardColor,
         ),
         padding: const EdgeInsets.all(15),
@@ -24,11 +29,15 @@ class UnitCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 8.0,
+              ),
               child: Text(
                 unit['unit'],
                 style: TextStyle(
-                    color: ThemeInfo.secondaryTextColor, fontSize: 16),
+                  color: ThemeInfo.secondaryTextColor,
+                  fontSize: 16,
+                ),
               ),
             ),
             const SizedBox(
@@ -39,10 +48,14 @@ class UnitCard extends StatelessWidget {
                 onTap: () {
                   selectedUnit = unit['unit'];
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => SectionsPage(
-                              sections: unit['sections'], unit: unit["unit"])));
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SectionsPage(
+                        sections: unit['sections'],
+                        unit: unit["unit"],
+                      ),
+                    ),
+                  );
                 },
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
