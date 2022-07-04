@@ -111,10 +111,9 @@ class LandingPage extends StatelessWidget {
               ),
               SubmitButton(
                 onPressed: () async {
-                  //DatabaseManagement.changeVideoLocation();
                   if (_formKey.currentState!.validate()) {
                     await UserManager.validateUser(userID);
-                    Navigator.push(
+                    Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                         builder: (context) => const HomePage(),

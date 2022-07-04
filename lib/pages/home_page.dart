@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:paddyway_academy/pages/landing_page.dart';
 import 'package:paddyway_academy/widgets/contact_us_button.dart';
 import 'package:paddyway_academy/widgets/unit_card.dart';
+import 'package:paddyway_academy/widgets/youtube_channel_card.dart';
 
 String? selectedUnit;
 
@@ -16,7 +17,6 @@ class _HomePageState extends State<HomePage> {
   late Future<List> _getLesson;
   @override
   initState() {
-    //if (currentUser != null) _getLesson = Firestore.getLessons();
     super.initState();
   }
 
@@ -35,6 +35,10 @@ class _HomePageState extends State<HomePage> {
                   UnitCard(
                     unit: subject,
                   ),
+                const SizedBox(
+                  height: 50,
+                ),
+                const YoutubeChannelCard(),
               ],
             )
           : Column(
@@ -49,6 +53,10 @@ class _HomePageState extends State<HomePage> {
                   height: 20,
                 ),
                 ContactUsButton(),
+                SizedBox(
+                  height: 30,
+                ),
+                YoutubeChannelCard(),
               ],
             ),
     );
