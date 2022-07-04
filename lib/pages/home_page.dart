@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:paddyway_academy/constants.dart';
 import 'package:paddyway_academy/pages/landing_page.dart';
 import 'package:paddyway_academy/widgets/contact_us_button.dart';
 import 'package:paddyway_academy/widgets/unit_card.dart';
@@ -14,49 +15,85 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late Future<List> _getLesson;
   @override
   initState() {
     super.initState();
   }
 
-  List onGoingLessons = [];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Your ongoing classes"),
-      ),
       body: currentUser != null
-          ? ListView(
-              children: [
-                for (Map subject in currentUser!.allowedSubjects!)
-                  UnitCard(
-                    unit: subject,
+          ? SafeArea(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 30,
+                      vertical: 20,
+                    ),
+                    child: Text(
+                      hiText,
+                      style:
+                          const TextStyle(color: Colors.white70, fontSize: 25),
+                    ),
                   ),
-                const SizedBox(
-                  height: 50,
-                ),
-                const YoutubeChannelCard(),
-              ],
+                  Expanded(
+                    child: ListView(
+                      shrinkWrap: true,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10),
+                          child: Text(
+                            currentTaskText,
+                            style: const TextStyle(
+                                color: Colors.white, fontSize: 20),
+                          ),
+                        ),
+                        for (Map subject in currentUser!.allowedSubjects!)
+                          UnitCard(
+                            unit: subject,
+                          ),
+                        const SizedBox(
+                          height: 50,
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 20.0,
+                          ),
+                          child: YoutubeChannelCard(),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             )
           : Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
+              children: [
                 Text(
-                  "There are no lessons available for you,\n for more information",
+                  invalidLoginText,
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 18),
+                  style: const TextStyle(
+                    fontSize: 18,
+                  ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
-                ContactUsButton(),
-                SizedBox(
+                const ContactUsButton(),
+                const SizedBox(
                   height: 30,
                 ),
-                YoutubeChannelCard(),
+                const Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 20.0,
+                  ),
+                  child: YoutubeChannelCard(),
+                ),
               ],
             ),
     );

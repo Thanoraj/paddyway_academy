@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:paddyway_academy/widgets/document_card.dart';
 import 'package:paddyway_academy/widgets/long_video_card.dart';
@@ -28,11 +27,7 @@ class _AllItemsPageState extends State<AllItemsPage> {
   List itemsList = [];
 
   Future<List> getItemList() async {
-    print("in");
     itemsList = [];
-    print(widget.unit);
-    print(widget.title);
-    print(widget.type);
     await FirebaseFirestore.instance
         .collection("lessons")
         .doc(widget.unit)
@@ -40,12 +35,9 @@ class _AllItemsPageState extends State<AllItemsPage> {
         .doc(widget.type ?? "videos")
         .get()
         .then((value) {
-      print(value.data());
       itemsList = value.data()![widget.type ?? 'videos'];
-    }).catchError((e) {
-      print(e);
-    });
-    print(itemsList);
+    }).catchError((e) {});
+
     return itemsList;
   }
 
@@ -61,6 +53,7 @@ class _AllItemsPageState extends State<AllItemsPage> {
           if (snapshot.connectionState == ConnectionState.done) {
             return itemsList.isNotEmpty
                 ? ListView.builder(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
                     itemCount: itemsList.length,
                     itemBuilder: (context, index) {
                       return widget.type == "documents"
@@ -73,7 +66,7 @@ class _AllItemsPageState extends State<AllItemsPage> {
                       child: Text(
                         "No ${widget.type ?? 'videos'} available in this section now",
                         textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 18),
+                        style: const TextStyle(fontSize: 18),
                       ),
                     ),
                   );

@@ -13,6 +13,9 @@ class SectionsPage extends StatelessWidget {
         title: Text(unit),
       ),
       body: ListView(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 20.0,
+        ),
         children: [
           for (String section in sections)
             SectionCard(

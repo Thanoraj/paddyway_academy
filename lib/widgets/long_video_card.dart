@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:paddyway_academy/models/youtube_video.dart';
 import 'package:paddyway_academy/pages/youtube_video_player.dart';
@@ -44,6 +45,25 @@ class LongVideoCard extends StatelessWidget {
                     videoInfo['thumbnails'],
                     height: 100,
                     fit: BoxFit.fitHeight,
+                    errorBuilder: (BuildContext context, Object exception,
+                        StackTrace? stackTrace) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: const [
+                            Text(
+                              "😟",
+                              style: TextStyle(fontSize: 18),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text("Error occurred!"),
+                          ],
+                        ),
+                      );
+                    },
                   ),
                 ),
                 const SizedBox(

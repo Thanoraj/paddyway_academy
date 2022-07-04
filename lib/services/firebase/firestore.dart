@@ -34,7 +34,6 @@ class Firestore {
           .doc(userId)
           .get()
           .then((value) {
-        print(value.data());
         if (value.data() != null) {
           currentUser = UserModel();
           currentUser!.id = value.data()!['id'];
@@ -47,20 +46,12 @@ class Firestore {
   }
 
   static uploadVideoData(Map data) async {
-    int i = 0;
     data.forEach((key, value) async {
-      // print(key);
-      // print(value['title']);
-      // return;
       await FirebaseFirestore.instance.collection("lessons").doc(key).set({
         'title': value['title'],
         'videos': value['videos'],
-      }).catchError((e) {
-        print(e);
-      });
-      print(i + 1);
+      }).catchError((e) {});
     });
-    print("completed");
   }
 
   static Future saveFalseAttempt(String userID) async {

@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:paddyway_academy/constants.dart';
 import 'package:paddyway_academy/theme_info.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -14,11 +16,11 @@ class YoutubeChannelCard extends StatelessWidget {
       ),
       child: Column(
         children: [
-          const Padding(
-            padding: EdgeInsets.all(8.0),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
             child: Text(
-              "Watch free videos in our youtube channel",
-              style: TextStyle(color: Colors.white70, fontSize: 16),
+              youtubeChannelText,
+              style: const TextStyle(color: Colors.white70, fontSize: 16),
             ),
           ),
           Container(
@@ -51,9 +53,15 @@ class YoutubeChannelCard extends StatelessWidget {
                 ),
                 Column(
                   children: [
-                    const Text(
-                      "Paddyway Academy",
-                      style: TextStyle(color: Colors.black87, fontSize: 20),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width - 190,
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: const Text(
+                          "Paddyway Academy",
+                          style: TextStyle(color: Colors.black87, fontSize: 20),
+                        ),
+                      ),
                     ),
                     const SizedBox(
                       height: 20,
@@ -70,12 +78,18 @@ class YoutubeChannelCard extends StatelessWidget {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10)),
                         ),
-                        child: const Padding(
+                        child: Padding(
                           padding: EdgeInsets.symmetric(
                               horizontal: 15, vertical: 10),
-                          child: Text(
-                            "Watch videos",
-                            style: TextStyle(fontSize: 18),
+                          child: SizedBox(
+                            width: MediaQuery.of(context).size.width - 270,
+                            child: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Text(
+                                "Watch videos",
+                                style: TextStyle(fontSize: 18),
+                              ),
+                            ),
                           ),
                         ))
                   ],

@@ -19,9 +19,7 @@ class FireStorage {
             .then((Directory directory) {
           Directory('storage/emulated/0/Paddyway Academy/pdfs')
               .create()
-              .then((Directory directory) {
-            print(directory.path);
-          });
+              .then((Directory directory) {});
         });
       }
       String fileName = '${dir.path}/${doc.name}';
@@ -44,25 +42,16 @@ class FireStorage {
         } else {
           try {
             String ref = '${doc.lesson}/${doc.name}';
-            print(1);
             await FirebaseStorage.instance
                 .ref(ref)
                 .writeToFile(downloadToFile)
-                .whenComplete(() {
-              print(2);
-            }).catchError((e) {
-              print(e);
-            });
-            print(3);
+                .whenComplete(() {})
+                .catchError((e) {});
           } on FirebaseException catch (e) {
-            print("e2$e");
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               content: Text(e.toString()),
             ));
-          } on Exception catch (e) {
-            print('e1$e');
           }
-          print(4);
           ScaffoldMessenger.of(context).clearSnackBars();
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             content: Text('Download Completed'),

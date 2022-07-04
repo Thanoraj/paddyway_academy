@@ -30,7 +30,6 @@ class _MyAppState extends State<MyApp> {
     PermissionStatus status = await Permission.storage.status;
     status = await Permission.storage.request();
 
-    print(status);
     if (status == PermissionStatus.denied ||
         status == PermissionStatus.limited) {
       status = await Permission.manageExternalStorage.request();
