@@ -25,6 +25,7 @@ class TeachByWidget extends StatelessWidget {
           height: 80,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Text(
                 teachByText1,
@@ -34,7 +35,7 @@ class TeachByWidget extends StatelessWidget {
               Text(
                 teachByText2,
                 style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 22,
                     color: ThemeInfo.primaryTextColor,
                     fontWeight: FontWeight.bold),
               ),

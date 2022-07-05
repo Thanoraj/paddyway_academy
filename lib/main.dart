@@ -32,9 +32,15 @@ class _MyAppState extends State<MyApp> {
     PermissionStatus status = await Permission.storage.status;
     status = await Permission.storage.request();
 
-    if (status == PermissionStatus.denied ||
-        status == PermissionStatus.limited) {
-      status = await Permission.manageExternalStorage.request();
+    if (await Permission.storage.status == PermissionStatus.granted &&
+        await Permission.manageExternalStorage.status ==
+            PermissionStatus.granted &&
+        await Permission.accessMediaLocation.status ==
+            PermissionStatus.granted) {
+    } else {
+      await Permission.accessMediaLocation.request();
+      await Permission.manageExternalStorage.request();
+      await Permission.storage.request();
     }
   }
 
@@ -43,10 +49,13 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: appName,
       theme: ThemeData(
-          primarySwatch: Colors.blue,
-          brightness: Brightness.dark,
-          scaffoldBackgroundColor: ThemeInfo.bgColor,
-          appBarTheme: AppBarTheme(color: ThemeInfo.appBarColor)),
+        primarySwatch: Colors.blue,
+        brightness: Brightness.dark,
+        scaffoldBackgroundColor: ThemeInfo.bgColor,
+        appBarTheme: AppBarTheme(
+          color: ThemeInfo.appBarColor,
+        ),
+      ),
       home: FutureBuilder(
           future: UserManager.checkLoginStatus(),
           builder: (context, snapshot) {

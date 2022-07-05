@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class ThemeInfo {
   // Colors
-  static Color cardColor = const Color(0xff191c2d);
-  static Color appBarColor = const Color(0x171616FF);
-  static Color bgColor = Colors.black;
+  static Color cardColor = const Color(0xfff5f5f5);
+  static Color appBarColor = const Color(0xFF034E86);
+  static Color bgColor = const Color(0xff000011);
   static Color primaryTextColor = Colors.white;
   static Color secondaryTextColor = Colors.white70;
   static Color contrastPrimaryTextColor = Colors.black;
@@ -15,10 +15,10 @@ class ThemeInfo {
   static Color youtubeChannelBgColor = const Color(0xfff5f5f5);
   static Color channelWatchVideoButtonColor = const Color(0xffff3f3f);
   static Color sectionVideoButtonColor = const Color(0xffe86c6c);
-  static Color sectionDocumentsButtonColor = const Color(0xff6ca1e7);
+  static Color sectionDocumentsButtonColor = const Color(0xff0c9aa7);
   static Color secondaryCardColor = Colors.grey[500]!;
   static Color downloadIconColor = Colors.red;
-  static Color customFlatButtonDefaultColor = const Color(0xff6c609c);
+  static Color customFlatButtonDefaultColor = Colors.green[800]!;
 
   // borders
   static OutlineInputBorder textBoxBorder = const OutlineInputBorder(

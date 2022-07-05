@@ -16,7 +16,7 @@ class DocumentCard extends StatelessWidget {
       child: SizedBox(
         height: 100,
         child: Material(
-          color: ThemeInfo.secondaryCardColor,
+          color: ThemeInfo.cardColor,
           elevation: 5,
           borderRadius: BorderRadius.circular(10),
           child: Row(
@@ -36,12 +36,13 @@ class DocumentCard extends StatelessWidget {
                 ),
               ),
               GestureDetector(
-                onTap: () {
+                onTap: () async {
                   DocumentModel doc = DocumentModel();
                   doc.lesson = selectedUnit!;
                   doc.name = document['name'];
                   doc.url = document['url'];
-                  doc.lesson = FireStorage.downloadDoc(context, doc);
+                  doc.lesson = selectedUnit!;
+                  await FireStorage.downloadDoc(context, doc);
                 },
                 child: Icon(
                   Icons.download,

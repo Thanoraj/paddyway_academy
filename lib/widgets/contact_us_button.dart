@@ -10,18 +10,37 @@ class ContactUsButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: ElevatedButton(
-          onPressed: () async {
-            await launchUrl(Uri.parse(waURL));
-          },
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: Text(
-              joinButtonText,
-              style: const TextStyle(fontSize: 18),
-            ),
-          )),
-    );
+    return ElevatedButton(
+        onPressed: () async {
+          await launchUrl(Uri.parse(waURL));
+        },
+        style: ElevatedButton.styleFrom(
+            primary: Colors.green[600],
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30))),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 9),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(
+                width: 25,
+                height: 25,
+                child: Image.asset(
+                  "assets/images/whatsapp.png",
+                ),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              Text(
+                joinButtonText,
+                style: const TextStyle(
+                  fontSize: 18,
+                ),
+              ),
+            ],
+          ),
+        ));
   }
 }

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:paddyway_academy/models/document_model.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class FireStorage {
@@ -12,17 +13,25 @@ class FireStorage {
     ));
     PermissionStatus status = await Permission.storage.status;
     if (status == PermissionStatus.granted) {
-      Directory dir = Directory('storage/emulated/0/Paddyway Academy/pdfs');
+      Directory? dir = Directory('storage/emulated/0/Paddyway Academy/pdfs');
+      print("hii");
       if (await dir.exists() != true) {
-        Directory('storage/emulated/0/Paddyway Academy')
+        print("1");
+        await Directory('storage/emulated/0/Paddyway Academy')
             .create()
-            .then((Directory directory) {
-          Directory('storage/emulated/0/Paddyway Academy/pdfs')
+            .then((Directory directory) async {
+          await Directory('storage/emulated/0/Paddyway Academy/pdfs')
               .create()
               .then((Directory directory) {});
+        }).catchError((e) async {
+          print('2');
+          dir = await getExternalStorageDirectory();
+          print(e);
         });
+        print(3);
       }
-      String fileName = '${dir.path}/${doc.name}';
+      print(dir);
+      String fileName = '${dir!.path}/${doc.name}';
       File downloadToFile = File(fileName);
       downloadToFile.setLastModified(DateTime.now());
       downloadToFile.setLastAccessed(DateTime.now());

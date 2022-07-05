@@ -29,11 +29,13 @@ class SectionCard extends StatelessWidget {
               child: Text(
                 sectionName,
                 style: TextStyle(
-                    color: ThemeInfo.secondaryTextColor, fontSize: 16),
+                    color: ThemeInfo.contrastPrimaryTextColor,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold),
               ),
             ),
             const SizedBox(
-              height: 30,
+              height: 10,
             ),
             MediaQuery.of(context).size.width > 350
                 ? Row(

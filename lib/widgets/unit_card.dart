@@ -35,16 +35,15 @@ class UnitCard extends StatelessWidget {
               child: Text(
                 unit['unit'],
                 style: TextStyle(
-                  color: ThemeInfo.secondaryTextColor,
-                  fontSize: 16,
+                  color: ThemeInfo.contrastPrimaryTextColor,
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),
-            const SizedBox(
-              height: 30,
-            ),
             Center(
               child: MyFlatButton(
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                 onTap: () {
                   selectedUnit = unit['unit'];
                   Navigator.push(

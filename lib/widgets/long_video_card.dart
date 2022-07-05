@@ -85,8 +85,9 @@ class LongVideoCard extends StatelessWidget {
                         videoInfo['videoTitle'],
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                          fontSize: 16,
-                          color: ThemeInfo.primaryTextColor,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: ThemeInfo.contrastPrimaryTextColor,
                         ),
                       ),
                       Row(
@@ -94,7 +95,7 @@ class LongVideoCard extends StatelessWidget {
                           Icon(
                             Icons.timer_outlined,
                             size: 15,
-                            color: ThemeInfo.primaryTextColor,
+                            color: ThemeInfo.contrastPrimaryTextColor,
                           ),
                           const SizedBox(
                             width: 5,
@@ -103,7 +104,7 @@ class LongVideoCard extends StatelessWidget {
                             videoInfo['duration'],
                             style: TextStyle(
                               fontSize: 13,
-                              color: ThemeInfo.primaryTextColor,
+                              color: ThemeInfo.contrastPrimaryTextColor,
                             ),
                           ),
                         ],
@@ -114,7 +115,7 @@ class LongVideoCard extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                           fontSize: 14,
-                          color: ThemeInfo.primaryTextColor,
+                          color: ThemeInfo.contrastPrimaryTextColor,
                         ),
                       ),
                     ],

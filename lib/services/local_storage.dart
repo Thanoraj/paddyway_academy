@@ -4,9 +4,9 @@ class LocalStorageManager {
   static String loginStatusKey = "LOGIN_STATUS_KEY";
   static String userIDKey = "USER_ID_KEY";
 
-  static Future saveLoginStatus() async {
+  static Future saveLoginStatus(bool val) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(loginStatusKey, true);
+    await prefs.setBool(loginStatusKey, val);
   }
 
   static Future saveUserID(String userID) async {

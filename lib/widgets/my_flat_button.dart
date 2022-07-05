@@ -8,11 +8,13 @@ class MyFlatButton extends StatelessWidget {
     this.color,
     required this.onTap,
     this.radius,
+    this.padding,
   }) : super(key: key);
   final Widget child;
   final Color? color;
   final Function onTap;
   final double? radius;
+  final EdgeInsets? padding;
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +29,11 @@ class MyFlatButton extends StatelessWidget {
           ),
           color: color ?? ThemeInfo.customFlatButtonDefaultColor,
         ),
-        padding: const EdgeInsets.symmetric(
-          horizontal: 20,
-          vertical: 15,
-        ),
+        padding: padding ??
+            const EdgeInsets.symmetric(
+              horizontal: 20,
+              vertical: 15,
+            ),
         child: child,
       ),
     );

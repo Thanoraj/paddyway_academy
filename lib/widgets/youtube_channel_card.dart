@@ -15,13 +15,17 @@ class YoutubeChannelCard extends StatelessWidget {
       ),
       child: Column(
         children: [
+          SizedBox(
+            height: 6,
+          ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 20),
+            padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
             child: Text(
               youtubeChannelText,
               style: TextStyle(
-                color: ThemeInfo.secondaryTextColor,
-                fontSize: 16,
+                color: ThemeInfo.contrastPrimaryTextColor,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
               ),
               textAlign: TextAlign.center,
             ),
@@ -29,7 +33,7 @@ class YoutubeChannelCard extends StatelessWidget {
           Container(
             decoration: BoxDecoration(color: ThemeInfo.youtubeChannelBgColor),
             padding: const EdgeInsets.all(5),
-            margin: const EdgeInsets.all(10),
+            margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             child: Row(
               children: [
                 Material(
@@ -61,7 +65,8 @@ class YoutubeChannelCard extends StatelessWidget {
                           channelName,
                           style: TextStyle(
                               color: ThemeInfo.contrastSecondaryTextColor,
-                              fontSize: 20),
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
                         ),
                       ),
                     ),

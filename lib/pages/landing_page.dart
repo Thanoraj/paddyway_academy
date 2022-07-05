@@ -3,6 +3,7 @@ import 'package:paddyway_academy/constants.dart';
 import 'package:paddyway_academy/services/user_management.dart';
 import 'package:paddyway_academy/theme_info.dart';
 import 'package:paddyway_academy/widgets/teach_by_widget.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../models/user_model.dart';
 import '../widgets/contact_us_button.dart';
@@ -18,108 +19,180 @@ class LandingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double availableSpace = MediaQuery.of(context).size.height - 675 > 0
+        ? MediaQuery.of(context).size.height - 675
+        : 0;
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Form(
-          key: _formKey,
-          child: ListView(
-            children: [
-              const SizedBox(
-                height: 50,
-              ),
-              Text(
-                appWelcomeText,
-                style: TextStyle(
-                    fontSize: 38,
-                    fontWeight: FontWeight.bold,
-                    color: ThemeInfo.primaryTextColor),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              Center(
-                child: SizedBox(
-                  width: 150,
-                  height: 150,
-                  child: Image.asset(
-                    logo,
-                    fit: BoxFit.fill,
-                  ),
+      resizeToAvoidBottomInset: true,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Form(
+            key: _formKey,
+            child: ListView(
+              children: [
+                const SizedBox(
+                  height: 30,
                 ),
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              Text(
-                codeText,
-                style:
-                    TextStyle(fontSize: 20, color: ThemeInfo.primaryTextColor),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              Center(
-                child: SizedBox(
-                  width: 150,
-                  child: TextFormField(
-                    validator: (String? val) {
-                      if (val!.isEmpty) return emptySubmitText;
-                      return null;
-                    },
-                    onChanged: (val) {
-                      userID = val.trim();
-                    },
-                    style: const TextStyle(
-                      fontSize: 20,
-                      letterSpacing: 4,
-                    ),
-                    textAlign: TextAlign.center,
-                    decoration: InputDecoration(
-                      hintStyle: TextStyle(
-                        fontSize: 20,
-                        color: ThemeInfo.primaryTextColor,
-                      ),
-                      enabledBorder: ThemeInfo.textBoxBorder,
-                      border: ThemeInfo.textBoxBorder,
-                      focusedBorder: ThemeInfo.textBoxBorder,
+                SizedBox(
+                  height: availableSpace / 6,
+                ),
+                Text(
+                  appWelcomeText,
+                  style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                      color: ThemeInfo.primaryTextColor),
+                  textAlign: TextAlign.center,
+                ),
+                Text(
+                  appName,
+                  style: TextStyle(
+                      fontSize: 35,
+                      fontWeight: FontWeight.bold,
+                      color: ThemeInfo.primaryTextColor),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                SizedBox(
+                  height: availableSpace / 6,
+                ),
+                Center(
+                  child: SizedBox(
+                    width: 150,
+                    height: 150,
+                    child: Image.asset(
+                      logo,
+                      fit: BoxFit.fill,
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              SubmitButton(
-                onPressed: () async {
-                  if (_formKey.currentState!.validate()) {
-                    await UserManager.validateUser(userID);
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const HomePage(),
-                      ),
-                    );
-                  }
-                },
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              const Center(child: TeachByWidget()),
-              const SizedBox(
-                height: 25,
-              ),
-              Center(
-                child: Text(
-                  contactUsText,
-                  style: const TextStyle(fontSize: 18),
+                SizedBox(
+                  height: availableSpace / 6,
                 ),
-              ),
-              const ContactUsButton(),
-            ],
+                Text(
+                  codeText,
+                  style: TextStyle(
+                      fontSize: 20, color: ThemeInfo.primaryTextColor),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Center(
+                  child: SizedBox(
+                    width: 150,
+                    child: Center(
+                      child: TextFormField(
+                        maxLines: 1,
+                        textAlignVertical: TextAlignVertical.top,
+                        validator: (String? val) {
+                          if (val!.isEmpty) return emptySubmitText;
+                          return null;
+                        },
+                        onChanged: (val) {
+                          userID = val.trim();
+                        },
+                        style: const TextStyle(
+                          fontSize: 20,
+                          letterSpacing: 4,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        textAlign: TextAlign.center,
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.zero,
+                          hintStyle: TextStyle(
+                            fontSize: 20,
+                            color: ThemeInfo.primaryTextColor,
+                          ),
+                          enabledBorder: ThemeInfo.textBoxBorder,
+                          border: ThemeInfo.textBoxBorder,
+                          focusedBorder: ThemeInfo.textBoxBorder,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                SubmitButton(
+                  onPressed: () async {
+                    if (_formKey.currentState!.validate()) {
+                      await UserManager.validateUser(userID);
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const HomePage(),
+                        ),
+                      );
+                    }
+                  },
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                SizedBox(
+                  height: availableSpace / 6,
+                ),
+                Center(
+                  child: Text(
+                    contactUsText,
+                    style: const TextStyle(fontSize: 18),
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 5.0),
+                  child: Center(child: ContactUsButton()),
+                ),
+                Center(
+                  child: Text(
+                    youtubeText,
+                    style: const TextStyle(fontSize: 18),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 5.0),
+                  child: Center(
+                      child: ElevatedButton(
+                          onPressed: () {
+                            launchUrl(
+                                Uri.parse(
+                                  channelUrl,
+                                ),
+                                mode: LaunchMode.externalApplication);
+                          },
+                          style: ElevatedButton.styleFrom(
+                              primary: ThemeInfo.channelWatchVideoButtonColor,
+                              shape: ThemeInfo.channelButtonBorder),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 15, vertical: 10),
+                            child: SizedBox(
+                              width: MediaQuery.of(context).size.width - 270,
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: Text(
+                                  channelButtonText,
+                                  style: const TextStyle(fontSize: 18),
+                                ),
+                              ),
+                            ),
+                          ))),
+                ),
+                SizedBox(
+                  height: availableSpace / 6,
+                ),
+                const Center(
+                  child: TeachByWidget(),
+                ),
+                SizedBox(
+                  height: availableSpace / 6,
+                ),
+              ],
+            ),
           ),
         ),
       ),

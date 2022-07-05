@@ -29,8 +29,8 @@ class _SubmitButtonState extends State<SubmitButton> {
           });
         },
         child: SizedBox(
-          width: 130,
-          height: 50,
+          width: 90,
+          height: 40,
           child: Center(
             child: isLoading
                 ? CircularProgressIndicator(
