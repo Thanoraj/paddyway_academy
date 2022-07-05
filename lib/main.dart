@@ -1,12 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:paddyway_academy/constants.dart';
 import 'package:paddyway_academy/pages/home_page.dart';
 import 'package:paddyway_academy/pages/landing_page.dart';
 import 'package:paddyway_academy/services/user_management.dart';
 import 'package:paddyway_academy/theme_info.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,23 +23,6 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    if (!kIsWeb) getPermissions();
-  }
-
-  getPermissions() async {
-    PermissionStatus status = await Permission.storage.status;
-    status = await Permission.storage.request();
-
-    if (await Permission.storage.status == PermissionStatus.granted &&
-        await Permission.manageExternalStorage.status ==
-            PermissionStatus.granted &&
-        await Permission.accessMediaLocation.status ==
-            PermissionStatus.granted) {
-    } else {
-      await Permission.accessMediaLocation.request();
-      await Permission.manageExternalStorage.request();
-      await Permission.storage.request();
-    }
   }
 
   @override

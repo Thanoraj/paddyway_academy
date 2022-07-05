@@ -1,14 +1,25 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:paddyway_academy/constants.dart';
 import 'package:paddyway_academy/models/document_model.dart';
 import 'package:paddyway_academy/pages/home_page.dart';
 import 'package:paddyway_academy/theme_info.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../services/firebase/firebase_storage.dart';
 
 class DocumentCard extends StatelessWidget {
   const DocumentCard({Key? key, required this.document}) : super(key: key);
   final Map document;
+
+  getPermissions() async {
+    PermissionStatus status = await Permission.manageExternalStorage.status;
+    if (status == PermissionStatus.granted) {
+    } else {
+      await Permission.manageExternalStorage.request();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -37,6 +48,8 @@ class DocumentCard extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () async {
+                  if (!kIsWeb) await getPermissions();
+
                   DocumentModel doc = DocumentModel();
                   doc.lesson = selectedUnit!;
                   doc.name = document['name'];

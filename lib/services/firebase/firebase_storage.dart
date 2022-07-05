@@ -11,7 +11,7 @@ class FireStorage {
     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
       content: Text('Downloading...'),
     ));
-    PermissionStatus status = await Permission.storage.status;
+    PermissionStatus status = await Permission.manageExternalStorage.status;
     if (status == PermissionStatus.granted) {
       Directory? dir = Directory('storage/emulated/0/Paddyway Academy/pdfs');
       print("hii");
