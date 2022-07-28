@@ -102,7 +102,10 @@ class LandingPage extends StatelessWidget {
                         ),
                         textAlign: TextAlign.center,
                         decoration: InputDecoration(
-                          contentPadding: EdgeInsets.zero,
+                          contentPadding:
+                              const EdgeInsets.symmetric(horizontal: 5),
+                          filled: true,
+                          fillColor: ThemeInfo.codeFieldFillColor,
                           hintStyle: TextStyle(
                             fontSize: 20,
                             color: ThemeInfo.primaryTextColor,
@@ -111,6 +114,7 @@ class LandingPage extends StatelessWidget {
                           border: ThemeInfo.textBoxBorder,
                           focusedBorder: ThemeInfo.textBoxBorder,
                         ),
+                        cursorColor: ThemeInfo.primaryLightColor,
                       ),
                     ),
                   ),
@@ -154,7 +158,7 @@ class LandingPage extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical: 5.0),
+                  padding: const EdgeInsets.symmetric(vertical: 5.0),
                   child: Center(
                       child: ElevatedButton(
                           onPressed: () {
@@ -169,16 +173,22 @@ class LandingPage extends StatelessWidget {
                               shape: ThemeInfo.channelButtonBorder),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 15, vertical: 10),
-                            child: SizedBox(
-                              width: MediaQuery.of(context).size.width - 270,
-                              child: FittedBox(
-                                fit: BoxFit.scaleDown,
-                                child: Text(
+                                horizontal: 5, vertical: 10),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                SizedBox(
+                                    height: 20,
+                                    child: Image.asset(
+                                        "assets/images/youtube.png")),
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                                Text(
                                   channelButtonText,
                                   style: const TextStyle(fontSize: 18),
                                 ),
-                              ),
+                              ],
                             ),
                           ))),
                 ),

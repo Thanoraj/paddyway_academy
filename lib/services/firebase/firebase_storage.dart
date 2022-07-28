@@ -11,12 +11,10 @@ class FireStorage {
     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
       content: Text('Downloading...'),
     ));
-    PermissionStatus status = await Permission.manageExternalStorage.status;
-    if (status == PermissionStatus.granted) {
+    PermissionStatus storageStatus = await Permission.storage.status;
+    if (storageStatus == PermissionStatus.granted) {
       Directory? dir = Directory('storage/emulated/0/Paddyway Academy/pdfs');
-      print("hii");
       if (await dir.exists() != true) {
-        print("1");
         await Directory('storage/emulated/0/Paddyway Academy')
             .create()
             .then((Directory directory) async {
@@ -24,13 +22,9 @@ class FireStorage {
               .create()
               .then((Directory directory) {});
         }).catchError((e) async {
-          print('2');
           dir = await getExternalStorageDirectory();
-          print(e);
         });
-        print(3);
       }
-      print(dir);
       String fileName = '${dir!.path}/${doc.name}';
       File downloadToFile = File(fileName);
       downloadToFile.setLastModified(DateTime.now());

@@ -19,12 +19,13 @@ class ThemeInfo {
   static Color secondaryCardColor = Colors.grey[500]!;
   static Color downloadIconColor = Colors.red;
   static Color customFlatButtonDefaultColor = Colors.green[800]!;
+  static Color codeFieldFillColor = Colors.grey[800]!;
 
   // borders
   static OutlineInputBorder textBoxBorder = const OutlineInputBorder(
-    borderSide: BorderSide(color: Colors.white54, width: 1.0),
+    borderSide: BorderSide(color: Colors.white70, width: 2.0),
     borderRadius: BorderRadius.all(
-      Radius.circular(10.0),
+      Radius.circular(25.0),
     ),
   );
   static RoundedRectangleBorder channelButtonBorder =

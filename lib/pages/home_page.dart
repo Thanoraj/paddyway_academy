@@ -31,6 +31,8 @@ class _HomePageState extends State<HomePage> {
                     ),
                     child: Text(
                       hiText,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
                       style: TextStyle(
                         color: ThemeInfo.secondaryTextColor,
                         fontSize: 25,

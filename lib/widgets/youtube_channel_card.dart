@@ -15,7 +15,7 @@ class YoutubeChannelCard extends StatelessWidget {
       ),
       child: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 6,
           ),
           Padding(

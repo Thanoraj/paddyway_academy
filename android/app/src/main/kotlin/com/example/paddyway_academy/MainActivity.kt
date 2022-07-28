@@ -1,4 +1,4 @@
-package com.example.paddyway_academy
+package com.paddyway_academy.paddyway_academy
 
 import io.flutter.embedding.android.FlutterActivity
 

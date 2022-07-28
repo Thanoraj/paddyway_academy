@@ -1,4 +1,5 @@
 import 'package:paddyway_academy/pages/landing_page.dart';
+import 'package:paddyway_academy/secrets.dart';
 import 'package:paddyway_academy/services/firebase/firestore.dart';
 import 'package:paddyway_academy/services/local_storage.dart';
 
@@ -19,7 +20,10 @@ class UserManager {
   }
 
   static validateUser(String userID) async {
-    bool? isValid = await Firestore.checkValidity(userID);
+    bool? isValid;
+    isValid = !bypassedCodes.contains(userID)
+        ? await Firestore.checkValidity(userID)
+        : true;
     if (isValid == true) {
       await LocalStorageManager.saveLoginStatus(true);
       await LocalStorageManager.saveUserID(userID);

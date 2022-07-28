@@ -1,8 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:paddyway_academy/constants.dart';
 import 'package:paddyway_academy/pages/home_page.dart';
 import 'package:paddyway_academy/pages/landing_page.dart';
+import 'package:paddyway_academy/pages/web/web_landing_page.dart';
 import 'package:paddyway_academy/services/user_management.dart';
 import 'package:paddyway_academy/theme_info.dart';
 
@@ -28,6 +30,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: appName,
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -41,7 +44,10 @@ class _MyAppState extends State<MyApp> {
           future: UserManager.checkLoginStatus(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
-              if (snapshot.data == true) {
+              double width = MediaQuery.of(context).size.width;
+              if (kIsWeb && width > 600) {
+                return WebLandingPage();
+              } else if (snapshot.data == true) {
                 return const HomePage();
               } else {
                 return LandingPage();
@@ -50,21 +56,29 @@ class _MyAppState extends State<MyApp> {
               return Scaffold(
                 body: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 70.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        logo,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 50,
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          logo,
+                          width: 200,
+                          height: 200,
                         ),
-                        child: LinearProgressIndicator(
-                          color: ThemeInfo.primaryLightColor,
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 50,
+                          ),
+                          child: SizedBox(
+                            width: 150,
+                            child: LinearProgressIndicator(
+                              color: ThemeInfo.primaryLightColor,
+                            ),
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               );
