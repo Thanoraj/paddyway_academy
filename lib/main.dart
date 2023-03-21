@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:paddyway_academy/constants.dart';
 import 'package:paddyway_academy/pages/home_page.dart';
 import 'package:paddyway_academy/pages/landing_page.dart';
-import 'package:paddyway_academy/pages/web/web_landing_page.dart';
 import 'package:paddyway_academy/services/user_management.dart';
 import 'package:paddyway_academy/theme_info.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  Firebase.initializeApp();
+  if (!kIsWeb) await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -46,11 +46,11 @@ class _MyAppState extends State<MyApp> {
             if (snapshot.connectionState == ConnectionState.done) {
               double width = MediaQuery.of(context).size.width;
               if (kIsWeb && width > 600) {
-                return WebLandingPage();
+                return const LandingPage();
               } else if (snapshot.data == true) {
                 return const HomePage();
               } else {
-                return LandingPage();
+                return const LandingPage();
               }
             } else {
               return Scaffold(

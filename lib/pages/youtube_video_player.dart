@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_windowmanager/flutter_windowmanager.dart';
 import 'package:paddyway_academy/models/youtube_video.dart';
 import 'package:paddyway_academy/theme_info.dart';
@@ -78,16 +77,15 @@ class _YoutubeVideoPlayerState extends State<YoutubeVideoPlayer> {
 
   @override
   Widget build(BuildContext context) {
+    print(_controller.value.isFullScreen);
     return Scaffold(
       body: Stack(children: [
         YoutubePlayerBuilder(
-          onExitFullScreen: () {
-            SystemChrome.setPreferredOrientations(
-              DeviceOrientation.values,
-            );
-          },
+          onExitFullScreen: () {},
+          onEnterFullScreen: () {},
           player: YoutubePlayer(
             controller: _controller,
+            aspectRatio: 1 / MediaQuery.of(context).size.aspectRatio,
             showVideoProgressIndicator: true,
             progressIndicatorColor: ThemeInfo.primaryLightColor,
             topActions: <Widget>[
@@ -121,7 +119,12 @@ class _YoutubeVideoPlayerState extends State<YoutubeVideoPlayer> {
                   children: <Widget>[
                     Column(children: [
                       SizedBox(
-                        width: MediaQuery.of(context).size.width,
+                        width: _controller.value.isFullScreen
+                            ? null
+                            : MediaQuery.of(context).size.width,
+                        height: _controller.value.isFullScreen
+                            ? MediaQuery.of(context).size.width
+                            : null,
                         child: player,
                       ),
                       Flexible(

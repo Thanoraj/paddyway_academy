@@ -14,8 +14,8 @@ UserModel? currentUser;
 String userID = '';
 
 class LandingPage extends StatelessWidget {
-  LandingPage({Key? key}) : super(key: key);
-  final _formKey = GlobalKey<FormState>();
+  const LandingPage({Key? key}) : super(key: key);
+  static final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -126,12 +126,21 @@ class LandingPage extends StatelessWidget {
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
                       await UserManager.validateUser(userID);
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const HomePage(),
-                        ),
-                      );
+                      if (currentUser != null) {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const HomePage(),
+                          ),
+                        );
+                      } else {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const HomePage(),
+                          ),
+                        );
+                      }
                     }
                   },
                 ),

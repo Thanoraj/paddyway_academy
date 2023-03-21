@@ -1,5 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:paddyway_academy/models/youtube_video.dart';
+import 'package:paddyway_academy/pages/web/youtube_web_player.dart';
 import 'package:paddyway_academy/pages/youtube_video_player.dart';
 import 'package:paddyway_academy/theme_info.dart';
 
@@ -19,14 +21,26 @@ class LongVideoCard extends StatelessWidget {
           videoModel.thumbnail = videoInfo['thumbnails'];
           videoModel.description = videoInfo['description'];
           videoModel.id = videoInfo['id'];
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => YoutubeVideoPlayer(
-                videoDetail: videoModel,
+          if (kIsWeb) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => YoutubeWebPlayer(
+                  videoModel: videoModel,
+                ),
               ),
-            ),
-          );
+            );
+          } else {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => /*YoutubePlayerDemoApp()*/
+                    YoutubeVideoPlayer(
+                  videoDetail: videoModel,
+                ),
+              ),
+            );
+          }
         },
         child: Material(
           borderRadius: BorderRadius.circular(15),
