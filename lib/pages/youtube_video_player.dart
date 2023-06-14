@@ -77,7 +77,6 @@ class _YoutubeVideoPlayerState extends State<YoutubeVideoPlayer> {
 
   @override
   Widget build(BuildContext context) {
-    print(_controller.value.isFullScreen);
     return Scaffold(
       body: Stack(children: [
         YoutubePlayerBuilder(

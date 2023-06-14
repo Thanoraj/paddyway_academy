@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:paddyway_academy/constants.dart';
 import 'package:paddyway_academy/pages/home_page.dart';
@@ -12,6 +13,7 @@ class UnitCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("ghf");
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: 20.0,
@@ -43,14 +45,26 @@ class UnitCard extends StatelessWidget {
             ),
             Center(
               child: MyFlatButton(
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                onTap: () {
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                onTap: () async {
+                  print("sections");
                   selectedUnit = unit['unit'];
+                  List sections = [];
+                  print(sections);
+                  await FirebaseFirestore.instance
+                      .collection("lessons")
+                      .doc(unit['unit'])
+                      .get()
+                      .then((value) {
+                    sections = value['sections'];
+                  });
+                  print(sections);
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => SectionsPage(
-                        sections: unit['sections'],
+                        sections: sections,
                         unit: unit["unit"],
                       ),
                     ),

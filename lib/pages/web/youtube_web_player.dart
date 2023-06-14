@@ -5,7 +5,6 @@ import 'package:flutter/services.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 import '../../models/youtube_video.dart';
-import '../../widgets/web/responsive_widget.dart';
 
 class YoutubeWebPlayer extends StatefulWidget {
   const YoutubeWebPlayer({Key? key, this.videoModel}) : super(key: key);
@@ -22,8 +21,8 @@ class _YoutubeWebPlayerState extends State<YoutubeWebPlayer> {
   @override
   void initState() {
     super.initState();
-    print("Hello world");
-    videoId = "Skh_wTbopzk" /*widget.videoModel.id!*/;
+    videoId =
+        "k5T7HrpKPa4" /*widget.videoModel.id!https://youtu.be/k5T7HrpKPa4*/;
     _controller = YoutubePlayerController(
       initialVideoId: videoId,
       params: const YoutubePlayerParams(
@@ -54,57 +53,20 @@ class _YoutubeWebPlayerState extends State<YoutubeWebPlayer> {
   @override
   Widget build(BuildContext context) {
     const player = YoutubePlayerIFrame();
-    return IgnorePointer(
-      child: YoutubePlayerControllerProvider(
-        // Passing controller to widgets below.
-        controller: _controller,
-        child: ResponsiveWidget(
-          largeScreen: Scaffold(
-            body: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Stack(
-                  children: [
-                    const IgnorePointer(child: player),
-                    GestureDetector(
-                      child: Container(
-                        color: const Color(0x88ffffff),
-                      ),
-                    ),
-                  ],
-                ),
-                GestureDetector(
-                  onTap: () {
-                    print("hello");
-                  },
-                  child: const Text("Gdi chia fhivwhi cwvijd"),
-                )
-              ],
+    return Column(
+      children: [
+        Stack(
+          //fit: StackFit.expand,
+          clipBehavior: Clip.none,
+          children: [
+            const SizedBox(height: 100, child: Text("Youtube player")),
+            YoutubePlayerControllerProvider(
+              controller: _controller,
+              child: player,
             ),
-          ),
-          mediumScreen: Scaffold(
-            body: ListView(
-              children: [
-                YoutubePlayerControllerProvider(
-                  // Provides controller to all the widget below it.
-                  controller: _controller,
-                  child: const YoutubePlayerIFrame(
-                    aspectRatio: 16 / 9,
-                  ),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    print("Hello world");
-                  },
-                  child: const Text(
-                    "Hello world",
-                  ),
-                ),
-              ],
-            ),
-          ),
+          ],
         ),
-      ),
+      ],
     );
   }
 }

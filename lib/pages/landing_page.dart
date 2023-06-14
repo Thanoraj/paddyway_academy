@@ -126,6 +126,7 @@ class LandingPage extends StatelessWidget {
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
                       await UserManager.validateUser(userID);
+
                       if (currentUser != null) {
                         Navigator.pushReplacement(
                           context,

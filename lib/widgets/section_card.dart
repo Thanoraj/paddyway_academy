@@ -3,6 +3,7 @@ import 'package:paddyway_academy/constants.dart';
 import 'package:paddyway_academy/pages/all_videos_page.dart';
 import 'package:paddyway_academy/theme_info.dart';
 
+import '../pages/home_page.dart';
 import 'my_flat_button.dart';
 
 class SectionCard extends StatelessWidget {
@@ -44,6 +45,7 @@ class SectionCard extends StatelessWidget {
                       MyFlatButton(
                         radius: 30,
                         onTap: () {
+                          selectedSection = sectionName;
                           Navigator.push(
                               context,
                               MaterialPageRoute(

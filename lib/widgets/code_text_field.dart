@@ -17,7 +17,6 @@ class CodeTextField extends StatelessWidget {
             maxLines: 1,
             textAlignVertical: TextAlignVertical.top,
             validator: (String? val) {
-              print(val);
               if (val!.isEmpty) return emptySubmitText;
               return null;
             },

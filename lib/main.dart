@@ -1,16 +1,23 @@
+//import 'dart:html' as html;
+
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/foundation.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:paddyway_academy/constants.dart';
 import 'package:paddyway_academy/pages/home_page.dart';
 import 'package:paddyway_academy/pages/landing_page.dart';
+import 'package:paddyway_academy/pages/web/web_landing_page.dart';
 import 'package:paddyway_academy/services/user_management.dart';
 import 'package:paddyway_academy/theme_info.dart';
 
+import 'firebase_options.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp();
-  if (!kIsWeb) await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  //if (!kIsWeb) await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -25,7 +32,21 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+    try {
+      if (kIsWeb) {
+        //if (Platform.isIOS || Platform.isAndroid) return;
+        // if (html.window.navigator.cookieEnabled == null) {
+        // } else if (!html.window.navigator.cookieEnabled!) {
+        // } else {}
+      }
+    } on Exception catch (e) {
+      print(e);
+    }
   }
+
+  // loadHtmlLib() async {
+  //   await deferredLibrary('dart:html') as html;
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -45,12 +66,26 @@ class _MyAppState extends State<MyApp> {
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               double width = MediaQuery.of(context).size.width;
-              if (kIsWeb && width > 600) {
-                return const LandingPage();
-              } else if (snapshot.data == true) {
-                return const HomePage();
+              if (kIsWeb) {
+                if (width > 500) {
+                  if (snapshot.data == true) {
+                    return const HomePage();
+                  } else {
+                    return WebLandingPage();
+                  }
+                } else {
+                  if (snapshot.data == true) {
+                    return const HomePage();
+                  } else {
+                    return const LandingPage();
+                  }
+                }
               } else {
-                return const LandingPage();
+                if (snapshot.data == true) {
+                  return const HomePage();
+                } else {
+                  return const LandingPage();
+                }
               }
             } else {
               return Scaffold(
@@ -83,7 +118,7 @@ class _MyAppState extends State<MyApp> {
                 ),
               );
             }
-          }),
+          },),
     );
   }
 }

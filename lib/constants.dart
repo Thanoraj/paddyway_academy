@@ -23,8 +23,8 @@ String invalidLoginText =
 String sectionCardButtonText = "View sessions";
 String channelName = "Paddyway Academy";
 String channelButtonText = "Watch here!";
-String sectionVideoButtonText = " View All Videos ";
-String sectionDocumentsButtonText = "View All e-Notes";
+String sectionVideoButtonText = "   View All Videos   ";
+String sectionDocumentsButtonText = "  View All e-Notes  ";
 
 // App images
 
